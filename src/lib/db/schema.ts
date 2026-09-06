@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
+import { sqliteTable, text, integer, index } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
 
 /**
@@ -10,40 +10,48 @@ import { sql } from 'drizzle-orm'
  *  - `isFlagged` uses integer 0/1 as SQLite has no native boolean.
  *  - Reaction columns use atomic SQL increments in toggleReaction to avoid
  *    read-modify-write races under concurrent requests.
+ *  - Composite indexes optimize board queries to eliminate full-table scans.
  */
-export const posts = sqliteTable('posts', {
-  /** cuid2-generated collision-resistant primary key */
-  id: text('id').primaryKey(),
+export const posts = sqliteTable(
+  'posts',
+  {
+    /** cuid2-generated collision-resistant primary key */
+    id: text('id').primaryKey(),
 
-  /** The anonymous confession / thought (max 500 chars enforced at app layer) */
-  content: text('content').notNull(),
+    /** The anonymous confession / thought (50-150 words enforced at app layer) */
+    content: text('content').notNull(),
 
-  /** One of the 7 named categories defined in src/constants */
-  category: text('category').notNull(),
+    /** One of the 7 named categories defined in src/constants */
+    category: text('category').notNull(),
 
-  /** Starred count — weighted ×2 in resonance score */
-  stars: integer('stars').default(0).notNull(),
+    /** Starred count — weighted ×2 in resonance score */
+    stars: integer('stars').default(0).notNull(),
 
-  /** "🤍 Heard" empathetic reaction count */
-  heardCount: integer('heard_count').default(0).notNull(),
+    /** "🤍 Heard" empathetic reaction count */
+    heardCount: integer('heard_count').default(0).notNull(),
 
-  /** "🫂 Hug" empathetic reaction count */
-  hugCount: integer('hug_count').default(0).notNull(),
+    /** "🫂 Hug" empathetic reaction count */
+    hugCount: integer('hug_count').default(0).notNull(),
 
-  /**
-   * Soft-delete / moderation flag.
-   * 0 = visible, 1 = flagged (hidden from public feed).
-   */
-  isFlagged: integer('is_flagged').default(0).notNull(),
+    /**
+     * Soft-delete / moderation flag.
+     * 0 = visible, 1 = flagged (hidden from public feed).
+     */
+    isFlagged: integer('is_flagged').default(0).notNull(),
 
-  /**
-   * Unix timestamp (seconds) set by SQLite at insert time.
-   * Stored as integer for fast arithmetic in time-range filters.
-   */
-  createdAt: integer('created_at')
-    .default(sql`(unixepoch())`)
-    .notNull(),
-})
+    /**
+     * Unix timestamp (seconds) set by SQLite at insert time.
+     * Stored as integer for fast arithmetic in time-range filters.
+     */
+    createdAt: integer('created_at')
+      .default(sql`(unixepoch())`)
+      .notNull(),
+  },
+  (table) => [
+    index('posts_feed_idx').on(table.isFlagged, table.createdAt),
+    index('posts_category_idx').on(table.category, table.isFlagged, table.createdAt),
+  ],
+)
 
 // ─── TypeScript inference helpers ────────────────────────────────────────────
 

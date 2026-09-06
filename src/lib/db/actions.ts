@@ -71,12 +71,19 @@ export async function createPost(
     throw new Error(`Invalid category: "${category}".`)
   }
 
+  // ── Storage Hygiene & Normalization ─────────────────────────────────────────
+  // Collapse excessive empty newlines (max 2 consecutive newlines) and multiple inline spaces
+  const sanitized = trimmed
+    .replace(/\r\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/[ \t]+/g, ' ')
+
   // ── Insert ──────────────────────────────────────────────────────────────────
   const id = createId()
 
   const [row] = await db
     .insert(posts)
-    .values({ id, content: trimmed, category })
+    .values({ id, content: sanitized, category })
     .returning()
 
   return row

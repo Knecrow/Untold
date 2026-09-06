@@ -104,9 +104,14 @@ export default function BoardClient({ initialNotes }: Props) {
   useEffect(() => { if (hydrated) saveInteractions(interactions) }, [interactions, hydrated])
   useEffect(() => { if (hydrated) saveFilter(activeFilter) }, [activeFilter, hydrated])
 
-  // ─── Poll for new posts every 60 s ───────────────────────────────────────
+  // ─── Poll for new posts every 60 s (only when tab is active/visible) ──────
   useEffect(() => {
     const tick = async () => {
+      // Don't waste database queries if user is in another tab or minimized
+      if (typeof document !== 'undefined' && document.visibilityState !== 'visible') {
+        return
+      }
+
       try {
         const fresh = await apiGetLatestPosts(50, 0)
         if (fresh.length > 0) {
@@ -116,7 +121,19 @@ export default function BoardClient({ initialNotes }: Props) {
     }
 
     const id = setInterval(tick, 60_000)
-    return () => clearInterval(id)
+
+    // Also fetch fresh posts when the user switches back to this tab
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        tick()
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      clearInterval(id)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [])
 
   // ─── Clear new-note highlight after animation ─────────────────────────────
