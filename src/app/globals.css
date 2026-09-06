@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+
+  --color-canvas: #FFFDF5;
+  --color-ink: #1A1A1A;
+
+  /* Category colors */
+  --color-small-wins: #FFD13B;
+  --color-secret-crush: #FFAEC0;
+  --color-wholesome: #88E788;
+  --color-silly: #FF8552;
+  --color-quiet-hope: #70C7FA;
+  --color-heavy-heart: #D7B4F3;
+  --color-unsent: #F4A261;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FFFDF5;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dotted canvas texture */
+.canvas-texture {
+  background-color: #FFFDF5;
+  background-image: radial-gradient(circle, #00000012 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Neubrutalist card shadow */
+.shadow-neo {
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+.shadow-neo-sm {
+  box-shadow: 2px 2px 0px 0px #000000;
+}
+.shadow-neo-lg {
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+/* Press effect */
+.btn-press {
+  transition: all 0.08s ease;
+}
+.btn-press:active {
+  transform: translate(2px, 2px);
+  box-shadow: none !important;
+}
+
+/* Masonry grid */
+.masonry-grid {
+  columns: 1;
+  column-gap: 1.25rem;
+}
+@media (min-width: 640px) {
+  .masonry-grid { columns: 2; }
+}
+@media (min-width: 1024px) {
+  .masonry-grid { columns: 3; }
+}
+@media (min-width: 1400px) {
+  .masonry-grid { columns: 4; }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+/* Card tilt */
+.card-tilt-1 { transform: rotate(-1.5deg); }
+.card-tilt-2 { transform: rotate(0.8deg); }
+.card-tilt-3 { transform: rotate(-0.5deg); }
+.card-tilt-4 { transform: rotate(1.2deg); }
+.card-tilt-5 { transform: rotate(-1deg); }
+.card-tilt-6 { transform: rotate(0.4deg); }
+
+.masonry-item:hover .note-card {
+  transform: rotate(0deg) scale(1.01);
+}
+
+.note-card {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.15s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #00000030; border-radius: 999px; }
+
+/* Filter bar scroll */
+.filter-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.filter-scroll::-webkit-scrollbar { display: none; }
+
+/* Modal backdrop */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Tooltip fade */
+@keyframes tooltip-in {
+  0% { opacity: 0; transform: translateY(4px) translateX(-50%); }
+  100% { opacity: 1; transform: translateY(0) translateX(-50%); }
+}
+.tooltip-animate {
+  animation: tooltip-in 0.15s ease forwards;
+}
+
+/* Pin animation */
+@keyframes pin-drop {
+  0% { opacity: 0; transform: translateY(-30px) scale(0.85); }
+  60% { opacity: 1; transform: translateY(4px) scale(1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.pin-drop {
+  animation: pin-drop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Star sparkle */
+@keyframes sparkle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+}
+.sparkle {
+  animation: sparkle 0.3s ease;
+}
+
+/* Top post spotlight glow */
+.spotlight-ring {
+  box-shadow: 4px 4px 0px 0px #000, 0 0 0 3px #FFD13B;
+}
+
+/* Character counter warning */
+.counter-warn { color: #FF8552; }
+.counter-danger { color: #ef4444; }
+
+/* Loading skeleton pulse */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+.skeleton-pulse {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}

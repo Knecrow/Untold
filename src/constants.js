@@ -1,0 +1,130 @@
+// ─── Category definitions ────────────────────────────────────────────────────
+export const CATEGORIES = [
+  { id: 'small-wins',   label: 'Small Wins',     emoji: '🏆', color: '#FFD13B', textColor: '#1A1A1A' },
+  { id: 'secret-crush', label: 'Secret Crush',   emoji: '💌', color: '#FFAEC0', textColor: '#1A1A1A' },
+  { id: 'wholesome',   label: 'Wholesome',       emoji: '🌿', color: '#88E788', textColor: '#1A1A1A' },
+  { id: 'silly',       label: 'Silly & Awkward', emoji: '🙈', color: '#FF8552', textColor: '#1A1A1A' },
+  { id: 'quiet-hope',  label: 'Quiet Hope',      emoji: '🌤️', color: '#70C7FA', textColor: '#1A1A1A' },
+  { id: 'heavy-heart', label: 'Heavy Heart',     emoji: '🌧️', color: '#D7B4F3', textColor: '#1A1A1A' },
+  { id: 'unsent',      label: 'Unsent Letters',  emoji: '✉️', color: '#F4A261', textColor: '#1A1A1A' },
+]
+
+export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map(c => [c.id, c]))
+
+// Tilt classes for organic layout
+export const TILT_CLASSES = [
+  'card-tilt-1', 'card-tilt-2', 'card-tilt-3',
+  'card-tilt-4', 'card-tilt-5', 'card-tilt-6',
+]
+
+// ─── Seed data ───────────────────────────────────────────────────────────────
+export const SEED_NOTES = [
+  {
+    id: 'seed-1',
+    category: 'quiet-hope',
+    text: "I applied for the job I thought was way out of my league. I don't know if I'll get it, but for the first time in a long time, I felt brave.",
+    stars: 48,
+    heard: 31,
+    hug: 22,
+    createdAt: Date.now() - 1000 * 60 * 45,
+  },
+  {
+    id: 'seed-2',
+    category: 'secret-crush',
+    text: "Every morning I rehearse a conversation with you that will never happen. You smell like old books and rain and I'm completely doomed.",
+    stars: 112,
+    heard: 87,
+    hug: 64,
+    createdAt: Date.now() - 1000 * 60 * 60 * 3,
+  },
+  {
+    id: 'seed-3',
+    category: 'small-wins',
+    text: "I made my bed for the 7th day in a row. It sounds so small but it's the first time since the breakup I've cared about my space at all.",
+    stars: 73,
+    heard: 56,
+    hug: 41,
+    createdAt: Date.now() - 1000 * 60 * 60 * 5,
+  },
+  {
+    id: 'seed-4',
+    category: 'heavy-heart',
+    text: "I smiled at everyone today at the party. Nobody knew I cried in my car before going in. I'm getting really good at pretending, and that scares me.",
+    stars: 94,
+    heard: 102,
+    hug: 88,
+    createdAt: Date.now() - 1000 * 60 * 60 * 8,
+  },
+  {
+    id: 'seed-5',
+    category: 'silly',
+    text: "I waved back at someone who wasn't waving at me. I kept waving and smiling for a solid 4 seconds before I realized. I will never recover.",
+    stars: 201,
+    heard: 178,
+    hug: 143,
+    createdAt: Date.now() - 1000 * 60 * 60 * 12,
+  },
+  {
+    id: 'seed-6',
+    category: 'wholesome',
+    text: 'My 70-year-old neighbor knocked on my door just to give me a jar of her homemade jam because "you looked tired last week." I cried a little.',
+    stars: 166,
+    heard: 134,
+    hug: 119,
+    createdAt: Date.now() - 1000 * 60 * 60 * 18,
+  },
+  {
+    id: 'seed-7',
+    category: 'unsent',
+    text: "Dear future me — I hope you're less afraid. I hope you finally took that trip, called that person back, and forgave yourself for the thing you still replay at 2am.",
+    stars: 88,
+    heard: 71,
+    hug: 60,
+    createdAt: Date.now() - 1000 * 60 * 60 * 24,
+  },
+  {
+    id: 'seed-8',
+    category: 'quiet-hope',
+    text: "I've been sober for 30 days. I'm not telling anyone in my life yet. But I needed somewhere to say it: I'm really, really proud of myself.",
+    stars: 143,
+    heard: 129,
+    hug: 117,
+    createdAt: Date.now() - 1000 * 60 * 60 * 30,
+  },
+  {
+    id: 'seed-9',
+    category: 'small-wins',
+    text: "I finally replied to that email I'd been avoiding for three weeks. The person responded warmly. All that anxiety for nothing. Story of my life honestly.",
+    stars: 55,
+    heard: 47,
+    hug: 33,
+    createdAt: Date.now() - 1000 * 60 * 60 * 36,
+  },
+  {
+    id: 'seed-10',
+    category: 'secret-crush',
+    text: "You laughed at my terrible joke in the meeting and I had to stare at my keyboard for a full minute after because my heart was misbehaving.",
+    stars: 78,
+    heard: 62,
+    hug: 44,
+    createdAt: Date.now() - 1000 * 60 * 60 * 48,
+  },
+  {
+    id: 'seed-11',
+    category: 'heavy-heart',
+    text: "Sometimes the loneliest I feel is in a crowded room full of people who love me. I don't know what that means about me but I needed to say it.",
+    stars: 119,
+    heard: 108,
+    hug: 93,
+    createdAt: Date.now() - 1000 * 60 * 60 * 52,
+  },
+  {
+    id: 'seed-12',
+    category: 'wholesome',
+    text: 'A stranger picked up the scarf I dropped without me noticing, ran after me half a block, and just said "here you go, stay warm." I think about this weekly.',
+    stars: 137,
+    heard: 119,
+    hug: 101,
+    createdAt: Date.now() - 1000 * 60 * 60 * 60,
+  },
+]
