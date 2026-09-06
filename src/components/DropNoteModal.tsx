@@ -6,7 +6,8 @@ import { apiCreatePost, apiPostToLocal } from '@/lib/api'
 import { X, Pin } from 'lucide-react'
 import type { LocalNote } from '@/app/board-client'
 
-const MAX_CHARS = 500
+const MIN_WORDS = 50
+const MAX_WORDS = 150
 
 interface Props {
   onClose: () => void
@@ -22,7 +23,8 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const cat = CATEGORY_MAP[category]
-  const remaining = MAX_CHARS - text.length
+  const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean) : []
+  const wordCount = words.length
 
   useEffect(() => {
     textareaRef.current?.focus()
@@ -37,12 +39,12 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
     e.preventDefault()
     if (honeypot) return // bot detected
 
-    if (text.trim().length < 5) {
-      setError('Please write at least a few words ✍️')
+    if (wordCount < MIN_WORDS) {
+      setError(`Please write at least ${MIN_WORDS} words to capture the story (${MIN_WORDS - wordCount} more words needed) ✍️`)
       return
     }
-    if (text.length > MAX_CHARS) {
-      setError(`Keep it under ${MAX_CHARS} characters`)
+    if (wordCount > MAX_WORDS) {
+      setError(`Please keep your story under ${MAX_WORDS} words (${wordCount - MAX_WORDS} words over)`)
       return
     }
 
@@ -81,11 +83,11 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
     }
   }
 
-  const counterClass = remaining < 0
-    ? 'counter-danger'
-    : remaining < 80
-      ? 'counter-warn'
-      : 'text-gray-400'
+  const counterClass = wordCount > MAX_WORDS
+    ? 'text-red-600 font-extrabold'
+    : wordCount < MIN_WORDS
+      ? 'text-[#8C6D3B] font-semibold'
+      : 'text-emerald-700 font-bold'
 
   return (
     <div
@@ -102,7 +104,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
         <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b-2 border-black bg-white">
           <div className="flex items-center gap-2">
             <Pin size={18} strokeWidth={2.5} />
-            <h2 className="font-bold text-lg font-serif">Drop a Note</h2>
+            <h2 className="font-bold text-lg font-serif">Drop an Untold Story</h2>
           </div>
           <button
             onClick={onClose}
@@ -141,25 +143,52 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
 
           {/* Text area */}
           <div>
-            <label className="block text-xs font-bold mb-2 uppercase tracking-wide text-[#1A1A1A]" htmlFor="note-text">
-              Your thought
-            </label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wide text-[#1A1A1A]" htmlFor="note-text">
+                Your Story or Occurrence
+              </label>
+              <span className="text-[11px] font-bold text-gray-500 bg-gray-100 border border-black/20 rounded-full px-2 py-0.5">
+                50 – 150 words
+              </span>
+            </div>
+
             <div className="relative">
               <textarea
                 id="note-text"
                 ref={textareaRef}
                 value={text}
                 onChange={e => { setText(e.target.value); setError('') }}
-                placeholder="What's been on your mind lately? No names, no judgment — just words."
-                rows={5}
-                maxLength={MAX_CHARS + 10}
+                placeholder="Tell us about a small moment, an encounter, or an occurrence from your life that you've never shared before... (at least 50 words)"
+                rows={7}
                 className="w-full bg-white border-2 border-black rounded-xl p-3 text-sm font-semibold resize-none placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black/30"
                 style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
               />
-              <span className={`absolute bottom-3 right-3 text-xs font-bold tabular-nums ${counterClass}`}>
-                {text.length} / {MAX_CHARS}
+            </div>
+
+            {/* Word count progress row */}
+            <div className="flex items-center justify-between mt-2 text-xs">
+              {wordCount < MIN_WORDS ? (
+                <span className="text-[#8C6D3B] font-semibold flex items-center gap-1">
+                  <span>✍️</span>
+                  <span>{MIN_WORDS - wordCount} more words needed</span>
+                </span>
+              ) : wordCount <= MAX_WORDS ? (
+                <span className="text-emerald-700 font-bold flex items-center gap-1">
+                  <span>✨</span>
+                  <span>Ready to pin to board</span>
+                </span>
+              ) : (
+                <span className="text-red-600 font-extrabold flex items-center gap-1">
+                  <span>⚠️</span>
+                  <span>{wordCount - MAX_WORDS} words over limit</span>
+                </span>
+              )}
+
+              <span className={`tabular-nums ${counterClass}`}>
+                {wordCount} / {MAX_WORDS} words
               </span>
             </div>
+
             {error && (
               <p className="mt-1.5 text-xs font-semibold text-red-600">{error}</p>
             )}
@@ -191,11 +220,15 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
           <button
             id="pin-to-board-btn"
             type="submit"
-            disabled={submitting || text.trim().length < 1 || remaining < 0}
+            disabled={submitting || wordCount < MIN_WORDS || wordCount > MAX_WORDS}
             className="btn-press w-full flex items-center justify-center gap-2 bg-[#1A1A1A] text-white border-2 border-black rounded-full py-3 font-bold text-sm shadow-neo cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#333] transition-colors"
           >
             <Pin size={16} />
-            {submitting ? 'Pinning…' : 'Pin to Board'}
+            {submitting
+              ? 'Pinning Story…'
+              : wordCount < MIN_WORDS
+                ? `${MIN_WORDS - wordCount} words to go…`
+                : 'Pin Story to Board'}
           </button>
         </form>
       </div>

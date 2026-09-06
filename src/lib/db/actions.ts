@@ -7,7 +7,8 @@ import { eq, desc, and, gte, sql } from 'drizzle-orm'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const MAX_CONTENT_LENGTH = 500
+const MIN_WORDS = 50
+const MAX_WORDS = 150
 
 const VALID_CATEGORIES = [
   'small-wins',
@@ -44,7 +45,7 @@ function secondsAgo(seconds: number): number {
 /**
  * Creates a new anonymous post.
  *
- * Validates content length and category membership before inserting.
+ * Validates word count (50-150 words) and category membership before inserting.
  * Returns the newly created post row.
  *
  * @throws {Error} if content or category is invalid
@@ -55,11 +56,16 @@ export async function createPost(
 ): Promise<Post> {
   // ── Validation ──────────────────────────────────────────────────────────────
   const trimmed = content?.trim()
-  if (!trimmed || trimmed.length < 5) {
-    throw new Error('Content must be at least 5 characters.')
+  if (!trimmed) {
+    throw new Error('Please write your story.')
   }
-  if (trimmed.length > MAX_CONTENT_LENGTH) {
-    throw new Error(`Content must be at most ${MAX_CONTENT_LENGTH} characters.`)
+
+  const words = trimmed.split(/\s+/).filter(Boolean)
+  if (words.length < MIN_WORDS) {
+    throw new Error(`Please share a small story or occurrence (at least ${MIN_WORDS} words). Currently ${words.length} words.`)
+  }
+  if (words.length > MAX_WORDS) {
+    throw new Error(`Please keep your story under ${MAX_WORDS} words. Currently ${words.length} words.`)
   }
   if (!VALID_CATEGORIES.includes(category as Category)) {
     throw new Error(`Invalid category: "${category}".`)

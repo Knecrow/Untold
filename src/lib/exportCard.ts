@@ -68,18 +68,31 @@ export async function exportCardAsImage(data: ExportCardData, noteId: string): P
   ctx.fillStyle = 'rgba(45, 42, 38, 0.75)'
   ctx.fillText(tagText, cardX + 60, tagY)
 
-  // 4. Main Thought Body
+  // 4. Main Thought / Story Body
   const textX = cardX + 60
-  const textY = cardY + 160
   const maxTextWidth = cardWidth - 120
   ctx.fillStyle = '#1C1A18'
-  ctx.font = '500 42px "Plus Jakarta Sans", sans-serif'
 
-  // Word wrap
-  const words = data.text.split(' ')
+  // Word-wrap & dynamic font size calculation based on story length
+  const words = data.text.split(/\s+/)
+  let fontSize = 34
+  let lineHeight = 50
+  let textY = cardY + 160
+
+  if (words.length > 100) {
+    fontSize = 24
+    lineHeight = 38
+    textY = cardY + 140
+  } else if (words.length > 60) {
+    fontSize = 28
+    lineHeight = 44
+    textY = cardY + 150
+  }
+
+  ctx.font = `500 ${fontSize}px "Plus Jakarta Sans", sans-serif`
+
   let line = ''
   let currentY = textY
-  const lineHeight = 64
 
   for (let n = 0; n < words.length; n++) {
     const testLine = line + words[n] + ' '
