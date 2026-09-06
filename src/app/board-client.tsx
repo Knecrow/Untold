@@ -5,9 +5,19 @@ import Header from '@/components/Header'
 import FilterBar from '@/components/FilterBar'
 import MasonryBoard from '@/components/MasonryBoard'
 import DropNoteModal from '@/components/DropNoteModal'
-import TopPostsDrawer from '@/components/TopPostsDrawer'
+import AboutSettingsModal from '@/components/AboutSettingsModal'
 import { apiGetLatestPosts, apiToggleReaction, apiPostToLocal } from '@/lib/api'
 import { SEED_NOTES } from '@/constants'
+
+// ─── Fisher-Yates Random Shuffle ─────────────────────────────────────────────
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
 
 // ─── localStorage helpers ─────────────────────────────────────────────────────
 
@@ -56,15 +66,21 @@ export default function BoardClient({ initialNotes }: Props) {
   const [interactions, setInteractions] = useState<Record<string, Record<string, boolean>>>({})
   const [activeFilter, setActiveFilter] = useState('all')
   const [showDropModal, setShowDropModal] = useState(false)
-  const [showTopPosts, setShowTopPosts]   = useState(false)
+  const [showAbout, setShowAbout]         = useState(false)
   const [newNoteId, setNewNoteId]         = useState<string | null>(null)
   const [loading, setLoading]            = useState(false)
 
-  // ─── Hydrate from localStorage (client-only) ──────────────────────────────
+  // ─── Hydrate from localStorage & Randomize on initial load ────────────────
   useEffect(() => {
     setInteractions(loadInteractions())
     setActiveFilter(loadFilter())
+    setNotes(prev => shuffleArray(prev))
     setHydrated(true)
+  }, [])
+
+  // ─── Shuffle callback (pure luck) ─────────────────────────────────────────
+  const handleShuffle = useCallback(() => {
+    setNotes(prev => shuffleArray(prev))
   }, [])
 
   // ─── Persist interactions & filter ───────────────────────────────────────
@@ -175,66 +191,104 @@ export default function BoardClient({ initialNotes }: Props) {
 
   // ─── Body scroll lock when modal open ────────────────────────────────────
   useEffect(() => {
-    document.body.style.overflow = (showDropModal || showTopPosts) ? 'hidden' : ''
+    document.body.style.overflow = (showDropModal || showAbout) ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [showDropModal, showTopPosts])
+  }, [showDropModal, showAbout])
 
   return (
-    <div className="min-h-screen canvas-texture">
-      {/* Header */}
-      <Header
-        onDropNote={() => setShowDropModal(true)}
-        onTopPosts={() => setShowTopPosts(true)}
-        noteCount={notes.length}
-      />
-
-      {/* Main content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-
-        {/* Hero tagline */}
-        <div className="mb-6 text-center sm:text-left">
-          <p className="text-base font-semibold text-gray-500 max-w-lg">
-            Anonymous. Honest. Heard. Drop your unspoken thoughts — no account needed.
-          </p>
-        </div>
-
-        {/* Filter bar */}
-        <div className="mb-6">
-          <FilterBar active={activeFilter} onChange={handleFilterChange} />
-        </div>
-
-        {/* Note count for current filter */}
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
-            {filteredNotes.length} {filteredNotes.length === 1 ? 'note' : 'notes'}
-            {activeFilter !== 'all' && ' in this category'}
-          </p>
-        </div>
-
-        {/* Masonry board */}
-        <MasonryBoard
-          notes={filteredNotes}
-          interactions={interactions}
-          onStar={handleStar}
-          onHeard={handleHeard}
-          onHug={handleHug}
-          onShare={handleShare}
-          newNoteId={newNoteId}
+    <div className="min-h-screen canvas-texture flex flex-col justify-between">
+      <div>
+        {/* Header */}
+        <Header
+          onDropNote={() => setShowDropModal(true)}
+          onAbout={() => setShowAbout(true)}
+          noteCount={notes.length}
         />
-      </main>
+
+        {/* Main content */}
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+
+          {/* Hero tagline */}
+          <div className="mb-6 text-center sm:text-left">
+            <p className="text-base font-medium text-[#2D2A26]/70 max-w-xl">
+              Anonymous. Ephemeral. Pure chance. Every refresh re-deals the board so every quiet thought has an equal chance to be heard.
+            </p>
+          </div>
+
+          {/* Filter & Shuffle bar */}
+          <div className="mb-6 flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex-1 min-w-0">
+              <FilterBar active={activeFilter} onChange={handleFilterChange} />
+            </div>
+            <button
+              onClick={handleShuffle}
+              title="Shuffle all thoughts randomly"
+              className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-4 py-1.5 text-sm font-bold bg-white text-[#1C1A18] shadow-neo-sm cursor-pointer hover:bg-neutral-50 transition-all shrink-0"
+            >
+              <span>🎲</span>
+              <span>Shuffle</span>
+            </button>
+          </div>
+
+          {/* Note count for current filter */}
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-xs font-semibold text-[#2D2A26]/50 uppercase tracking-wide">
+              {filteredNotes.length} {filteredNotes.length === 1 ? 'thought' : 'thoughts'}
+              {activeFilter !== 'all' && ' in this category'}
+            </p>
+          </div>
+
+          {/* Bento board */}
+          <MasonryBoard
+            notes={filteredNotes}
+            interactions={interactions}
+            onStar={handleStar}
+            onHeard={handleHeard}
+            onHug={handleHug}
+            onShare={handleShare}
+            newNoteId={newNoteId}
+          />
+        </main>
+      </div>
 
       {/* Footer */}
-      <footer className="border-t-2 border-black mt-12 py-6 text-center">
-        <p className="text-xs font-semibold text-gray-400">
-          Untold · Anonymous, ephemeral, honest · No account. No judgment.
-        </p>
+      <footer className="border-t-2 border-black mt-16 py-8 bg-[#F7F4EE]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-[#2D2A26]/70">
+          <p>
+            Untold · Created with care by{' '}
+            <a
+              href="https://github.com/Knecrow"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline font-bold hover:text-neutral-700"
+            >
+              Syed Nahian (@Knecrow)
+            </a>
+          </p>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setShowAbout(true)}
+              className="underline hover:text-black cursor-pointer font-bold"
+            >
+              About & Settings
+            </button>
+            <a
+              href="https://github.com/Knecrow/Untold"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-black font-bold"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
       </footer>
 
       {/* Floating drop button (mobile) */}
       <button
         id="fab-drop-note"
         onClick={() => setShowDropModal(true)}
-        className="btn-press fixed bottom-6 right-5 z-40 sm:hidden flex items-center justify-center w-14 h-14 bg-[#1A1A1A] text-white border-2 border-black rounded-full shadow-neo text-2xl cursor-pointer"
+        className="btn-press fixed bottom-6 right-5 z-40 sm:hidden flex items-center justify-center w-14 h-14 bg-[#1C1A18] text-white border-2 border-black rounded-full shadow-neo text-2xl cursor-pointer"
         aria-label="Drop a note"
       >
         📌
@@ -248,10 +302,14 @@ export default function BoardClient({ initialNotes }: Props) {
         />
       )}
 
-      {showTopPosts && (
-        <TopPostsDrawer
-          notes={notes}
-          onClose={() => setShowTopPosts(false)}
+      {showAbout && (
+        <AboutSettingsModal
+          onClose={() => setShowAbout(false)}
+          onShuffle={handleShuffle}
+          onClearInteractions={() => {
+            setInteractions({})
+            localStorage.removeItem(LS_INTERACTIONS)
+          }}
         />
       )}
     </div>
