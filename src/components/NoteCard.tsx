@@ -35,30 +35,30 @@ export default function NoteCard({ note, index, interactions, onStar, onHeard, o
   return (
     <div className={`masonry-item ${isNew ? 'pin-drop' : ''}`}>
       <div
-        className={`note-card ${tilt} border-2 border-black rounded-2xl p-5 shadow-neo select-none`}
+        className={`note-card ${tilt} border-2 border-black rounded-2xl p-6 shadow-neo select-none`}
         style={{
           backgroundColor: cat.color || '#FFFDF5',
         }}
       >
 
-        {/* Top bar */}
-        <div className="flex items-center justify-between mb-3 gap-2">
-          <span className="inline-flex items-center gap-1.5 bg-white/85 backdrop-blur-xs border-2 border-black rounded-full px-3 py-0.5 text-xs font-bold text-[#2D2A26] shadow-neo-sm whitespace-nowrap">
-            <span>{cat.emoji}</span>
-            <span>{cat.label}</span>
-          </span>
-          <span className="text-xs font-semibold text-[#2D2A26]/60 whitespace-nowrap shrink-0">
+        {/* Top bar — quiet & clean */}
+        <div className="flex items-center justify-between mb-4 text-xs select-none">
+          <div className="inline-flex items-center gap-1.5">
+            <span className="text-sm">{cat.emoji}</span>
+            <span className="font-semibold text-[#2D2A26]/80">{cat.label}</span>
+          </div>
+          <span className="text-[0.75rem] font-medium text-[#2D2A26]/50">
             {relativeTime(note.createdAt)}
           </span>
         </div>
 
-        {/* Body */}
-        <p className="text-[0.96rem] font-medium leading-relaxed text-[#2D2A26] mb-4 break-words">
+        {/* Body text — the hero of the card */}
+        <p className="text-[1.08rem] sm:text-[1.125rem] font-medium leading-[1.65] text-[#1C1A18] mb-5 break-words tracking-[-0.01em]">
           {note.text}
         </p>
 
-        {/* Action bar */}
-        <div className="flex items-center gap-2 flex-wrap pt-2.5 border-t border-black/10">
+        {/* Action bar — low-profile, clean counters */}
+        <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-black/10">
 
           {/* Star */}
           <ActionButton
@@ -67,7 +67,7 @@ export default function NoteCard({ note, index, interactions, onStar, onHeard, o
             onClick={() => onStar(note.id)}
             title="Star this note"
           >
-            <Star size={14} className={myInteract.starred ? 'fill-current' : ''} />
+            <Star size={13} className={myInteract.starred ? 'fill-current' : ''} />
             <span>{note.stars}</span>
           </ActionButton>
 
@@ -98,14 +98,16 @@ export default function NoteCard({ note, index, interactions, onStar, onHeard, o
             <button
               onClick={handleShare}
               title="Copy link"
-              className="btn-press inline-flex items-center gap-1.5 bg-white border-2 border-black rounded-full px-3 py-1 text-xs font-bold shadow-neo-sm cursor-pointer hover:bg-[#FFFDF5] transition-colors"
+              className="btn-press inline-flex items-center gap-1 border border-black/15 rounded-full px-2.5 py-1 text-xs font-semibold text-[#2D2A26]/70 cursor-pointer hover:text-black hover:border-black/30 hover:bg-black/5 transition-all"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.65)' }}
             >
-              <Share2 size={12} />
+              <Share2 size={11} />
               <span>Share</span>
             </button>
             {showTooltip && (
-              <div className="tooltip-animate absolute bottom-full left-1/2 mb-2 bg-[#1A1A1A] text-white text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap pointer-events-none"
-                style={{ transform: 'translateX(-50%)' }}>
+              <div
+                className="tooltip-animate absolute bottom-full right-0 mb-2 bg-[#1A1A1A] text-white text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap pointer-events-none"
+              >
                 ✓ Copied!
               </div>
             )}
@@ -137,9 +139,11 @@ function ActionButton({ active, color, onClick, title, children }: ActionButtonP
     <button
       onClick={handleClick}
       title={title}
-      className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-3 py-1 text-xs font-bold shadow-neo-sm cursor-pointer transition-colors"
+      className="btn-press inline-flex items-center gap-1.5 border border-black/15 rounded-full px-2.5 py-1 text-xs font-semibold text-[#2D2A26] cursor-pointer transition-all hover:border-black/30 hover:bg-black/5"
       style={{
-        backgroundColor: active ? color : 'white',
+        backgroundColor: active ? color : 'rgba(255, 255, 255, 0.65)',
+        borderColor: active ? '#000000' : undefined,
+        boxShadow: active ? '1px 1px 0px 0px #000' : 'none',
       }}
     >
       <span className={popped ? 'sparkle' : ''}>{children}</span>
