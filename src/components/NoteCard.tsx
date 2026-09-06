@@ -32,33 +32,37 @@ export default function NoteCard({ note, index, interactions, onStar, onHeard, o
     tooltipTimer.current = setTimeout(() => setShowTooltip(false), 2000)
   }
 
+  const textLength = note.text?.length ?? 0
+  const isBentoWide = textLength > 120 || (index % 5 === 1 && textLength > 75)
+
   return (
-    <div className={`masonry-item ${isNew ? 'pin-drop' : ''}`}>
+    <div className={`bento-item ${isBentoWide ? 'sm:col-span-2' : 'col-span-1'} ${isNew ? 'pin-drop' : ''}`}>
       <div
-        className={`note-card ${tilt} border-2 border-black rounded-2xl p-6 shadow-neo select-none`}
+        className="note-card h-full flex flex-col justify-between border-2 border-black rounded-2xl p-6 shadow-neo select-none"
         style={{
           backgroundColor: cat.color || '#FFFDF5',
         }}
       >
-
-        {/* Top bar — quiet & clean */}
-        <div className="flex items-center justify-between mb-4 text-xs select-none">
-          <div className="inline-flex items-center gap-1.5">
-            <span className="text-sm">{cat.emoji}</span>
-            <span className="font-semibold text-[#2D2A26]/80">{cat.label}</span>
+        <div>
+          {/* Top bar — quiet & clean */}
+          <div className="flex items-center justify-between mb-4 text-xs select-none">
+            <div className="inline-flex items-center gap-1.5">
+              <span className="text-sm">{cat.emoji}</span>
+              <span className="font-semibold text-[#2D2A26]/80">{cat.label}</span>
+            </div>
+            <span className="text-[0.75rem] font-medium text-[#2D2A26]/50">
+              {relativeTime(note.createdAt)}
+            </span>
           </div>
-          <span className="text-[0.75rem] font-medium text-[#2D2A26]/50">
-            {relativeTime(note.createdAt)}
-          </span>
+
+          {/* Body text — the hero of the card */}
+          <p className={`font-medium leading-[1.65] text-[#1C1A18] mb-6 break-words tracking-[-0.01em] ${isBentoWide ? 'text-[1.125rem] sm:text-[1.2rem]' : 'text-[1.05rem] sm:text-[1.1rem]'}`}>
+            {note.text}
+          </p>
         </div>
 
-        {/* Body text — the hero of the card */}
-        <p className="text-[1.08rem] sm:text-[1.125rem] font-medium leading-[1.65] text-[#1C1A18] mb-5 break-words tracking-[-0.01em]">
-          {note.text}
-        </p>
-
         {/* Action bar — low-profile, clean counters */}
-        <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-black/10">
+        <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-black/10 mt-auto">
 
           {/* Star */}
           <ActionButton

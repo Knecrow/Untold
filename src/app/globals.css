@@ -94,6 +94,7 @@ body {
   transform: none;
 }
 
+.bento-item:hover .note-card,
 .masonry-item:hover .note-card {
   transform: translateY(-3px);
   box-shadow: 6px 6px 0px #000;
