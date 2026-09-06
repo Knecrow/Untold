@@ -33,15 +33,7 @@ export default function NoteCard({ note, index, interactions, onStar, onHeard, o
   }
 
   return (
-    <div className={`masonry-item relative pt-2.5 ${isNew ? 'pin-drop' : ''}`}>
-      {/* Washi Tape Strip */}
-      <div
-        className="washi-tape"
-        style={{
-          backgroundColor: cat.tapeColor || 'rgba(45,42,38,0.12)',
-        }}
-      />
-
+    <div className={`masonry-item ${isNew ? 'pin-drop' : ''}`}>
       <div
         className={`note-card ${tilt} border-2 border-black rounded-2xl p-5 shadow-neo select-none`}
         style={{
