@@ -82,16 +82,19 @@ body {
   display: block;
 }
 
-/* Card tilt */
-.card-tilt-1 { transform: rotate(-1.5deg); }
-.card-tilt-2 { transform: rotate(0.8deg); }
-.card-tilt-3 { transform: rotate(-0.5deg); }
-.card-tilt-4 { transform: rotate(1.2deg); }
-.card-tilt-5 { transform: rotate(-1deg); }
-.card-tilt-6 { transform: rotate(0.4deg); }
+/* Card tilt - straight modern cards */
+.card-tilt-1,
+.card-tilt-2,
+.card-tilt-3,
+.card-tilt-4,
+.card-tilt-5,
+.card-tilt-6 {
+  transform: none;
+}
 
 .masonry-item:hover .note-card {
-  transform: rotate(0deg) scale(1.01);
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0px #000;
 }
 
 .note-card {
