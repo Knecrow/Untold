@@ -4,17 +4,17 @@
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-serif: 'Instrument Serif', serif;
 
-  --color-canvas: #FFFDF5;
-  --color-ink: #1A1A1A;
+  --color-canvas: #F7F4EE;
+  --color-ink: #2D2A26;
 
   /* Category colors */
-  --color-small-wins: #FFD13B;
-  --color-secret-crush: #FFAEC0;
-  --color-wholesome: #88E788;
-  --color-silly: #FF8552;
-  --color-quiet-hope: #70C7FA;
-  --color-heavy-heart: #D7B4F3;
-  --color-unsent: #F4A261;
+  --color-small-wins: #FFFBEB;
+  --color-secret-crush: #FDF2F4;
+  --color-wholesome: #F0F7F2;
+  --color-silly: #FEF3E7;
+  --color-quiet-hope: #EDF6FC;
+  --color-heavy-heart: #F3F0FA;
+  --color-unsent: #F7F3E8;
 }
 
 *, *::before, *::after {
@@ -28,17 +28,34 @@ html {
 body {
   margin: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #FFFDF5;
-  color: #1A1A1A;
+  background-color: #F7F4EE;
+  color: #2D2A26;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dotted canvas texture */
+/* Dotted canvas texture with warm paper feel */
 .canvas-texture {
-  background-color: #FFFDF5;
-  background-image: radial-gradient(circle, #00000012 1px, transparent 1px);
+  background-color: #F7F4EE;
+  background-image: radial-gradient(circle, #2D2A2614 1.2px, transparent 1.2px);
   background-size: 24px 24px;
+}
+
+/* Washi tape paper effect */
+.washi-tape {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 20px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(45, 42, 38, 0.2);
+  border-right: 2px dashed rgba(45, 42, 38, 0.2);
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+  z-index: 10;
 }
 
 /* Neubrutalist card shadow */

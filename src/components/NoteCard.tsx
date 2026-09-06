@@ -33,27 +33,40 @@ export default function NoteCard({ note, index, interactions, onStar, onHeard, o
   }
 
   return (
-    <div className={`masonry-item ${isNew ? 'pin-drop' : ''}`}>
-      <div className={`note-card ${tilt} bg-white border-2 border-black rounded-2xl p-5 shadow-neo select-none`}>
+    <div className={`masonry-item relative pt-2.5 ${isNew ? 'pin-drop' : ''}`}>
+      {/* Washi Tape Strip */}
+      <div
+        className="washi-tape"
+        style={{
+          backgroundColor: cat.tapeColor || 'rgba(45,42,38,0.12)',
+        }}
+      />
+
+      <div
+        className={`note-card ${tilt} border-2 border-black rounded-2xl p-5 shadow-neo select-none`}
+        style={{
+          backgroundColor: cat.color || '#FFFDF5',
+        }}
+      >
 
         {/* Top bar */}
         <div className="flex items-center justify-between mb-3 gap-2">
-          <span className="inline-flex items-center gap-1.5 bg-neutral-50 border-2 border-black rounded-full px-3 py-0.5 text-xs font-bold text-neutral-900 shadow-neo-sm whitespace-nowrap">
+          <span className="inline-flex items-center gap-1.5 bg-white/85 backdrop-blur-xs border-2 border-black rounded-full px-3 py-0.5 text-xs font-bold text-[#2D2A26] shadow-neo-sm whitespace-nowrap">
             <span>{cat.emoji}</span>
             <span>{cat.label}</span>
           </span>
-          <span className="text-xs font-semibold text-neutral-400 whitespace-nowrap shrink-0">
+          <span className="text-xs font-semibold text-[#2D2A26]/60 whitespace-nowrap shrink-0">
             {relativeTime(note.createdAt)}
           </span>
         </div>
 
         {/* Body */}
-        <p className="text-[0.95rem] font-medium leading-relaxed text-neutral-900 mb-4 break-words">
+        <p className="text-[0.96rem] font-medium leading-relaxed text-[#2D2A26] mb-4 break-words">
           {note.text}
         </p>
 
         {/* Action bar */}
-        <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-neutral-100">
+        <div className="flex items-center gap-2 flex-wrap pt-2.5 border-t border-black/10">
 
           {/* Star */}
           <ActionButton

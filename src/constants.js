@@ -1,12 +1,12 @@
-// ─── Category definitions ────────────────────────────────────────────────────
+// ─── Category definitions (Vintage Muted Stationery Paper Palette) ───────────────
 export const CATEGORIES = [
-  { id: 'small-wins',   label: 'Small Wins',     emoji: '🏆', color: '#FFD13B', textColor: '#1A1A1A' },
-  { id: 'secret-crush', label: 'Secret Crush',   emoji: '💌', color: '#FFAEC0', textColor: '#1A1A1A' },
-  { id: 'wholesome',   label: 'Wholesome',       emoji: '🌿', color: '#88E788', textColor: '#1A1A1A' },
-  { id: 'silly',       label: 'Silly & Awkward', emoji: '🙈', color: '#FF8552', textColor: '#1A1A1A' },
-  { id: 'quiet-hope',  label: 'Quiet Hope',      emoji: '🌤️', color: '#70C7FA', textColor: '#1A1A1A' },
-  { id: 'heavy-heart', label: 'Heavy Heart',     emoji: '🌧️', color: '#D7B4F3', textColor: '#1A1A1A' },
-  { id: 'unsent',      label: 'Unsent Letters',  emoji: '✉️', color: '#F4A261', textColor: '#1A1A1A' },
+  { id: 'small-wins',   label: 'Small Wins',     emoji: '🏆', color: '#FFFBEB', tapeColor: 'rgba(234, 179, 8, 0.35)', textColor: '#2D2A26' },
+  { id: 'secret-crush', label: 'Secret Crush',   emoji: '💌', color: '#FDF2F4', tapeColor: 'rgba(244, 114, 182, 0.35)', textColor: '#2D2A26' },
+  { id: 'wholesome',   label: 'Wholesome',       emoji: '🌿', color: '#F0F7F2', tapeColor: 'rgba(52, 211, 153, 0.35)', textColor: '#2D2A26' },
+  { id: 'silly',       label: 'Silly & Awkward', emoji: '🙈', color: '#FEF3E7', tapeColor: 'rgba(251, 146, 60, 0.35)', textColor: '#2D2A26' },
+  { id: 'quiet-hope',  label: 'Quiet Hope',      emoji: '🌤️', color: '#EDF6FC', tapeColor: 'rgba(56, 189, 248, 0.35)', textColor: '#2D2A26' },
+  { id: 'heavy-heart', label: 'Heavy Heart',     emoji: '🌧️', color: '#F3F0FA', tapeColor: 'rgba(192, 132, 252, 0.35)', textColor: '#2D2A26' },
+  { id: 'unsent',      label: 'Unsent Letters',  emoji: '✉️', color: '#F7F3E8', tapeColor: 'rgba(217, 119, 6, 0.30)', textColor: '#2D2A26' },
 ]
 
 export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map(c => [c.id, c]))
