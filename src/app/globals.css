@@ -168,3 +168,29 @@ body {
 .skeleton-pulse {
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
+
+/* Floating emoji flourish on reaction */
+@keyframes floatUpFade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(calc(-50% + var(--drift-x, 0px)), -26px) scale(1.2) rotate(var(--rot, 8deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift-x, 0px)), -50px) scale(0.85) rotate(var(--rot, -10deg));
+  }
+}
+
+.reaction-flourish {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  pointer-events: none;
+  animation: floatUpFade 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  user-select: none;
+  z-index: 30;
+}

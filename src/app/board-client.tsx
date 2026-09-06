@@ -6,7 +6,7 @@ import FilterBar from '@/components/FilterBar'
 import MasonryBoard from '@/components/MasonryBoard'
 import DropNoteModal from '@/components/DropNoteModal'
 import AboutSettingsModal from '@/components/AboutSettingsModal'
-import { apiGetLatestPosts, apiToggleReaction, apiPostToLocal } from '@/lib/api'
+import { apiGetLatestPosts, apiToggleReaction, apiPostToLocal, apiFlagPost } from '@/lib/api'
 import { SEED_NOTES } from '@/constants'
 
 // ─── Fisher-Yates Random Shuffle ─────────────────────────────────────────────
@@ -23,6 +23,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 const LS_INTERACTIONS = 'untold:interactions'
 const LS_FILTER       = 'untold:filter'
+const LS_HIDDEN       = 'untold:hidden'
 
 function loadInteractions(): Record<string, Record<string, boolean>> {
   try {
@@ -37,6 +38,14 @@ function loadFilter(): string {
 }
 function saveFilter(v: string) {
   try { localStorage.setItem(LS_FILTER, v) } catch {}
+}
+function loadHidden(): Set<string> {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(LS_HIDDEN) ?? '[]'))
+  } catch { return new Set() }
+}
+function saveHidden(v: Set<string>) {
+  try { localStorage.setItem(LS_HIDDEN, JSON.stringify(Array.from(v))) } catch {}
 }
 
 // ─── Note shape used throughout the UI ───────────────────────────────────────
@@ -68,19 +77,27 @@ export default function BoardClient({ initialNotes }: Props) {
   const [showDropModal, setShowDropModal] = useState(false)
   const [showAbout, setShowAbout]         = useState(false)
   const [newNoteId, setNewNoteId]         = useState<string | null>(null)
+  const [hiddenIds, setHiddenIds]         = useState<Set<string>>(new Set())
   const [loading, setLoading]            = useState(false)
 
   // ─── Hydrate from localStorage & Randomize on initial load ────────────────
   useEffect(() => {
     setInteractions(loadInteractions())
     setActiveFilter(loadFilter())
+    setHiddenIds(loadHidden())
     setNotes(prev => shuffleArray(prev))
     setHydrated(true)
   }, [])
 
-  // ─── Shuffle callback (pure luck) ─────────────────────────────────────────
-  const handleShuffle = useCallback(() => {
-    setNotes(prev => shuffleArray(prev))
+  // ─── Flag & hide note ─────────────────────────────────────────────────────
+  const handleFlag = useCallback((noteId: string) => {
+    setHiddenIds(prev => {
+      const next = new Set(prev)
+      next.add(noteId)
+      saveHidden(next)
+      return next
+    })
+    apiFlagPost(noteId).catch(() => {})
   }, [])
 
   // ─── Persist interactions & filter ───────────────────────────────────────
@@ -111,10 +128,11 @@ export default function BoardClient({ initialNotes }: Props) {
     }
   }, [newNoteId])
 
-  // ─── Filtered notes ───────────────────────────────────────────────────────
+  // ─── Filtered notes (excluding hidden/flagged notes) ──────────────────────
+  const visibleNotes = notes.filter(n => !hiddenIds.has(n.id))
   const filteredNotes = activeFilter === 'all'
-    ? notes
-    : notes.filter(n => n.category === activeFilter)
+    ? visibleNotes
+    : visibleNotes.filter(n => n.category === activeFilter)
 
   // ─── Interaction toggle ───────────────────────────────────────────────────
   // Maps UI toggle key → API reaction type
@@ -215,19 +233,9 @@ export default function BoardClient({ initialNotes }: Props) {
             </p>
           </div>
 
-          {/* Filter & Shuffle bar */}
-          <div className="mb-6 flex items-center justify-between gap-3 flex-wrap">
-            <div className="flex-1 min-w-0">
-              <FilterBar active={activeFilter} onChange={handleFilterChange} />
-            </div>
-            <button
-              onClick={handleShuffle}
-              title="Shuffle all thoughts randomly"
-              className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-4 py-1.5 text-sm font-bold bg-white text-[#1C1A18] shadow-neo-sm cursor-pointer hover:bg-neutral-50 transition-all shrink-0"
-            >
-              <span>🎲</span>
-              <span>Shuffle</span>
-            </button>
+          {/* Filter bar */}
+          <div className="mb-6">
+            <FilterBar active={activeFilter} onChange={handleFilterChange} />
           </div>
 
           {/* Note count for current filter */}
@@ -246,6 +254,7 @@ export default function BoardClient({ initialNotes }: Props) {
             onHeard={handleHeard}
             onHug={handleHug}
             onShare={handleShare}
+            onFlag={handleFlag}
             newNoteId={newNoteId}
           />
         </main>
@@ -305,7 +314,6 @@ export default function BoardClient({ initialNotes }: Props) {
       {showAbout && (
         <AboutSettingsModal
           onClose={() => setShowAbout(false)}
-          onShuffle={handleShuffle}
           onClearInteractions={() => {
             setInteractions({})
             localStorage.removeItem(LS_INTERACTIONS)

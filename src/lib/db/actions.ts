@@ -198,3 +198,17 @@ export async function toggleReaction(
 
   return updated ?? null
 }
+
+// ─── 5. flagPost ─────────────────────────────────────────────────────────────
+
+/**
+ * Flags a post as inappropriate (isFlagged = 1).
+ */
+export async function flagPost(postId: string): Promise<boolean> {
+  if (!postId || typeof postId !== 'string') return false
+  await db
+    .update(posts)
+    .set({ isFlagged: 1 })
+    .where(eq(posts.id, postId))
+  return true
+}

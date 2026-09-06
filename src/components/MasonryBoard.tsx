@@ -10,10 +10,11 @@ interface Props {
   onHeard: (id: string) => void
   onHug: (id: string) => void
   onShare: (id: string) => void
+  onFlag?: (id: string) => void
   newNoteId: string | null
 }
 
-export default function MasonryBoard({ notes, interactions, onStar, onHeard, onHug, onShare, newNoteId }: Props) {
+export default function MasonryBoard({ notes, interactions, onStar, onHeard, onHug, onShare, onFlag, newNoteId }: Props) {
   if (notes.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -38,6 +39,7 @@ export default function MasonryBoard({ notes, interactions, onStar, onHeard, onH
           onHeard={onHeard}
           onHug={onHug}
           onShare={onShare}
+          onFlag={onFlag}
           isNew={note.id === newNoteId}
         />
       ))}

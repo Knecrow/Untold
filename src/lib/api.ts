@@ -104,3 +104,14 @@ export function apiPostToLocal(p: ApiPost) {
     createdAt: p.createdAt * 1000,   // seconds → milliseconds
   }
 }
+
+// ─── flagPost ────────────────────────────────────────────────────────────────
+
+export async function apiFlagPost(id: string): Promise<boolean> {
+  try {
+    await fetch(`${BASE}/posts/${id}/flag`, { method: 'POST' })
+    return true
+  } catch {
+    return false
+  }
+}

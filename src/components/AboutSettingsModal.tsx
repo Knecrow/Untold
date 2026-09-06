@@ -6,10 +6,9 @@ import { X, Sparkles, Shield, RefreshCw, Trash2, Heart, ExternalLink, Dices } fr
 interface Props {
   onClose: () => void
   onClearInteractions?: () => void
-  onShuffle?: () => void
 }
 
-export default function AboutSettingsModal({ onClose, onClearInteractions, onShuffle }: Props) {
+export default function AboutSettingsModal({ onClose, onClearInteractions }: Props) {
   const [cleared, setCleared] = useState(false)
 
   function handleClear() {
@@ -112,23 +111,7 @@ export default function AboutSettingsModal({ onClose, onClearInteractions, onShu
           <div className="bg-white border-2 border-black rounded-2xl p-5 shadow-neo-sm">
             <h3 className="font-bold text-sm text-[#1C1A18] uppercase tracking-wide mb-3">Settings & Controls</h3>
             <div className="space-y-3">
-              {onShuffle && (
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-bold text-[#1C1A18]">Re-shuffle Board</p>
-                    <p className="text-[0.7rem] text-neutral-500">Roll the dice to get a completely new random order of thoughts</p>
-                  </div>
-                  <button
-                    onClick={() => { onShuffle(); onClose() }}
-                    className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-3 py-1 text-xs font-bold bg-[#F7F4EE] shadow-neo-sm cursor-pointer hover:bg-neutral-100"
-                  >
-                    <RefreshCw size={12} />
-                    <span>Shuffle</span>
-                  </button>
-                </div>
-              )}
-
-              <div className="flex items-center justify-between gap-3 pt-2 border-t border-neutral-100">
+              <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-xs font-bold text-[#1C1A18]">Reset My Interactions</p>
                   <p className="text-[0.7rem] text-neutral-500">Clears your saved reaction hearts & stars from this browser</p>
