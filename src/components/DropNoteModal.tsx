@@ -97,7 +97,6 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
     >
       <div
         className="w-full max-w-lg bg-white border-2 border-black rounded-2xl shadow-neo-lg overflow-hidden"
-        style={{ backgroundColor: cat.color }}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b-2 border-black bg-white">

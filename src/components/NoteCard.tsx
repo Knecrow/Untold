@@ -34,27 +34,26 @@ export default function NoteCard({ note, index, interactions, onStar, onHeard, o
 
   return (
     <div className={`masonry-item ${isNew ? 'pin-drop' : ''}`}>
-      <div className={`note-card ${tilt} bg-white border-2 border-black rounded-2xl p-4 shadow-neo select-none`}
-        style={{ backgroundColor: cat.color }}>
+      <div className={`note-card ${tilt} bg-white border-2 border-black rounded-2xl p-5 shadow-neo select-none`}>
 
         {/* Top bar */}
         <div className="flex items-center justify-between mb-3 gap-2">
-          <span className="inline-flex items-center gap-1 bg-white border-2 border-black rounded-full px-3 py-0.5 text-xs font-700 shadow-neo-sm whitespace-nowrap">
+          <span className="inline-flex items-center gap-1.5 bg-neutral-50 border-2 border-black rounded-full px-3 py-0.5 text-xs font-bold text-neutral-900 shadow-neo-sm whitespace-nowrap">
             <span>{cat.emoji}</span>
-            <span className="font-bold">{cat.label}</span>
+            <span>{cat.label}</span>
           </span>
-          <span className="text-xs font-semibold opacity-60 whitespace-nowrap shrink-0">
+          <span className="text-xs font-semibold text-neutral-400 whitespace-nowrap shrink-0">
             {relativeTime(note.createdAt)}
           </span>
         </div>
 
         {/* Body */}
-        <p className="text-[0.95rem] font-semibold leading-relaxed text-[#1A1A1A] mb-4 break-words">
+        <p className="text-[0.95rem] font-medium leading-relaxed text-neutral-900 mb-4 break-words">
           {note.text}
         </p>
 
         {/* Action bar */}
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-neutral-100">
 
           {/* Star */}
           <ActionButton

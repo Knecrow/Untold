@@ -82,8 +82,7 @@ export default function TopPostsDrawer({ notes, onClose }: Props) {
             return (
               <div
                 key={note.id}
-                className={`p-4 border-2 border-black rounded-2xl ${isTop ? 'spotlight-ring' : 'shadow-neo-sm bg-white'}`}
-                style={{ backgroundColor: isTop ? cat.color : 'white' }}
+                className={`p-4 border-2 border-black rounded-2xl bg-white ${isTop ? 'shadow-neo ring-2 ring-[#FFD13B]/50' : 'shadow-neo-sm'}`}
               >
                 {isTop && (
                   <div className="flex items-center gap-1.5 mb-2">
