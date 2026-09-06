@@ -8,6 +8,10 @@ import { createClient } from '@libsql/client'
 import { drizzle } from 'drizzle-orm/libsql'
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
+import nextEnv from '@next/env'
+const { loadEnvConfig } = nextEnv
+
+loadEnvConfig(process.cwd())
 
 const posts = sqliteTable('posts', {
   id:         text('id').primaryKey(),
@@ -35,7 +39,9 @@ const SEED = [
   { id: 'seed-12', category: 'wholesome',    content: 'A stranger picked up the scarf I dropped without me noticing, ran after me half a block, and just said "here you go, stay warm." I think about this weekly.', stars: 137, heardCount: 119, hugCount: 101, createdAt: Math.floor(Date.now()/1000) - 60*60*60 },
 ]
 
-const client = createClient({ url: 'file:local.db' })
+const url = process.env.TURSO_DATABASE_URL || 'file:local.db'
+const authToken = process.env.TURSO_AUTH_TOKEN
+const client = createClient({ url, authToken })
 const db = drizzle(client)
 
 console.log('Seeding database…')
@@ -46,5 +52,5 @@ for (const note of SEED) {
     console.warn(`Skipped ${note.id}:`, e.message)
   }
 }
-console.log(`✓ Seeded ${SEED.length} notes into local.db`)
+console.log(`✓ Seeded ${SEED.length} notes into database (${url})`)
 client.close()
