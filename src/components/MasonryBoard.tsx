@@ -2,6 +2,7 @@
 
 import NoteCard from './NoteCard'
 import type { LocalNote } from '@/app/board-client'
+import { Inbox } from 'lucide-react'
 
 interface Props {
   notes: LocalNote[]
@@ -18,7 +19,7 @@ export default function MasonryBoard({ notes, interactions, onStar, onHeard, onH
   if (notes.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <div className="text-5xl mb-4">📭</div>
+        <Inbox size={42} strokeWidth={1.75} className="text-[#2D2A26]/40 mb-3" />
         <h3 className="text-lg font-bold text-[#1A1A1A] mb-2">Nothing here yet</h3>
         <p className="text-sm text-gray-500 max-w-xs font-medium">
           No notes match this filter. Try another category or be the first to drop one!
@@ -28,7 +29,7 @@ export default function MasonryBoard({ notes, interactions, onStar, onHeard, onH
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 [grid-auto-flow:dense]">
+    <div className="masonry-grid">
       {notes.map((note, index) => (
         <NoteCard
           key={note.id}

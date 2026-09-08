@@ -63,7 +63,7 @@ body {
   box-shadow: none !important;
 }
 
-/* Masonry grid */
+/* Masonry grid: 1 col on mobile, 2 on tablet, strictly 3 on PC */
 .masonry-grid {
   columns: 1;
   column-gap: 1.25rem;
@@ -74,14 +74,22 @@ body {
 @media (min-width: 1024px) {
   .masonry-grid { columns: 3; }
 }
-@media (min-width: 1400px) {
-  .masonry-grid { columns: 4; }
-}
 
 .masonry-item {
   break-inside: avoid;
   margin-bottom: 1.25rem;
   display: block;
+}
+
+/* 3 Distinct Card Height Tiers */
+.card-tier-short {
+  min-height: 270px;
+}
+.card-tier-medium {
+  min-height: 350px;
+}
+.card-tier-tall {
+  min-height: 430px;
 }
 
 /* Card tilt - straight modern cards */
@@ -94,7 +102,6 @@ body {
   transform: none;
 }
 
-.bento-item:hover .note-card,
 .masonry-item:hover .note-card {
   transform: translateY(-3px);
   box-shadow: 6px 6px 0px #000;

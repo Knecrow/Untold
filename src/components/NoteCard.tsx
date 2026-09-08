@@ -69,13 +69,19 @@ export default function NoteCard({
     }
   }
 
-  const textLength = note.text?.length ?? 0
-  const isBentoWide = textLength > 120 || (index % 5 === 1 && textLength > 75)
+  // Calculate word count for 3 distinct card height tiers
+  const wordCount = (note.text || '').trim().split(/\s+/).filter(Boolean).length
+  const tierClass =
+    wordCount <= 75
+      ? 'card-tier-short'
+      : wordCount <= 115
+        ? 'card-tier-medium'
+        : 'card-tier-tall'
 
   return (
-    <div className={`bento-item ${isBentoWide ? 'sm:col-span-2' : 'col-span-1'} ${isNew ? 'pin-drop' : ''}`}>
+    <div className={`masonry-item ${isNew ? 'pin-drop' : ''}`}>
       <div
-        className="note-card h-full flex flex-col justify-between border-2 border-black rounded-2xl p-6 shadow-neo select-none"
+        className={`note-card ${tierClass} w-full flex flex-col justify-between border-2 border-black rounded-2xl p-6 shadow-neo select-none`}
         style={{
           backgroundColor: cat.color || '#FFFDF5',
         }}
@@ -99,11 +105,7 @@ export default function NoteCard({
           </div>
 
           {/* Body text — the hero of the card */}
-          <p
-            className={`font-medium leading-[1.65] text-[#1C1A18] mb-6 break-words tracking-[-0.01em] ${
-              isBentoWide ? 'text-[1.125rem] sm:text-[1.2rem]' : 'text-[1.05rem] sm:text-[1.1rem]'
-            }`}
-          >
+          <p className="font-medium leading-[1.65] text-[#1C1A18] mb-6 break-words tracking-[-0.01em] text-[1.05rem] sm:text-[1.1rem]">
             {note.text}
           </p>
         </div>
