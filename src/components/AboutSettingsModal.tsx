@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { X, Sparkles, Shield, RefreshCw, Trash2, Heart, ExternalLink, Dices } from 'lucide-react'
+import { X, Sparkles, Shield, RefreshCw, Trash2, Heart, ExternalLink, Dices, Pin } from 'lucide-react'
 
 interface Props {
   onClose: () => void
@@ -31,7 +31,7 @@ export default function AboutSettingsModal({ onClose, onClearInteractions }: Pro
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-black bg-white shrink-0">
           <div className="flex items-center gap-2">
-            <span className="text-xl">📌</span>
+            <Pin size={18} strokeWidth={2.4} className="text-[#1C1A18]" />
             <h2 className="font-bold text-lg font-serif">About Untold</h2>
           </div>
           <button

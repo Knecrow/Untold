@@ -1,7 +1,7 @@
 'use client'
 
 import { CATEGORY_MAP } from '@/constants'
-import { Star, Share2, Flag, Camera } from 'lucide-react'
+import { Share2, Flag, Camera } from 'lucide-react'
 import { useState, useRef } from 'react'
 import { exportCardAsImage } from '@/lib/exportCard'
 import type { LocalNote } from '@/app/board-client'
@@ -84,7 +84,7 @@ export default function NoteCard({
           {/* Top bar — quiet, clean & timeless (no dates or timestamps) */}
           <div className="flex items-center justify-between mb-4 text-xs select-none">
             <div className="inline-flex items-center gap-1.5">
-              <span className="text-sm">{cat.emoji}</span>
+              <span className="text-xs font-bold text-[#2D2A26]/70">{cat.emoji}</span>
               <span className="font-semibold text-[#2D2A26]/80">{cat.label}</span>
             </div>
             {/* Discreet Flag / Report button */}
@@ -110,15 +110,15 @@ export default function NoteCard({
 
         {/* Action bar — low-profile, clean counters */}
         <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-black/10 mt-auto">
-          {/* Star with floating sparkle */}
+          {/* Star with floating star */}
           <ActionButton
             active={myInteract.starred}
             color="#FFD13B"
-            emoji="⭐"
+            emoji="★"
             onClick={() => onStar(note.id)}
             title="Star this note"
           >
-            <Star size={13} className={myInteract.starred ? 'fill-current' : ''} />
+            <span className="text-[13px] leading-none">★</span>
             <span>{note.stars}</span>
           </ActionButton>
 
@@ -126,23 +126,23 @@ export default function NoteCard({
           <ActionButton
             active={myInteract.heard}
             color="#70C7FA"
-            emoji="🤍"
+            emoji="♥"
             onClick={() => onHeard(note.id)}
             title="I heard this"
           >
-            <span>🤍</span>
+            <span className="text-[13px] leading-none">♥</span>
             <span>{note.heard}</span>
           </ActionButton>
 
-          {/* Hug with floating hug */}
+          {/* Hug with floating comfort spark */}
           <ActionButton
             active={myInteract.hugged}
             color="#FFAEC0"
-            emoji="🫂"
+            emoji="✦"
             onClick={() => onHug(note.id)}
-            title="Send a hug"
+            title="Send comfort"
           >
-            <span>🫂</span>
+            <span className="text-[13px] leading-none">✦</span>
             <span>{note.hug}</span>
           </ActionButton>
 

@@ -169,17 +169,17 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
             <div className="flex items-center justify-between mt-2 text-xs">
               {wordCount < MIN_WORDS ? (
                 <span className="text-[#8C6D3B] font-semibold flex items-center gap-1">
-                  <span>✍️</span>
+                  <span className="text-[13px] leading-none">✎</span>
                   <span>{MIN_WORDS - wordCount} more words needed</span>
                 </span>
               ) : wordCount <= MAX_WORDS ? (
                 <span className="text-emerald-700 font-bold flex items-center gap-1">
-                  <span>✨</span>
+                  <span className="text-[13px] leading-none">✦</span>
                   <span>Ready to pin to board</span>
                 </span>
               ) : (
                 <span className="text-red-600 font-extrabold flex items-center gap-1">
-                  <span>⚠️</span>
+                  <span className="text-[11px] leading-none">▲</span>
                   <span>{wordCount - MAX_WORDS} words over limit</span>
                 </span>
               )}
@@ -212,7 +212,8 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
           <div className="text-xs font-semibold opacity-60 flex items-center gap-1.5">
             <span>Preview:</span>
             <span className="inline-flex items-center gap-1 bg-white border-2 border-black rounded-full px-2 py-0.5 text-xs font-bold shadow-neo-sm">
-              {cat.emoji} {cat.label}
+              <span className="text-xs font-bold text-[#2D2A26]/70">{cat.emoji}</span>
+              <span>{cat.label}</span>
             </span>
           </div>
 

@@ -193,4 +193,6 @@ body {
   animation: floatUpFade 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   user-select: none;
   z-index: 30;
+  font-weight: 700;
+  color: #1C1A18;
 }

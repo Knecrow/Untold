@@ -2,7 +2,7 @@
 
 import { CATEGORIES } from '@/constants'
 
-const ALL_BTN = { id: 'all', label: 'All', emoji: '✨', color: '#1A1A1A' }
+const ALL_BTN = { id: 'all', label: 'All', emoji: '✦', color: '#1A1A1A' }
 
 interface Props {
   active: string
