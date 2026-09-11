@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://taleless.vercel.app'),
   title: 'Untold — Your Unspoken Thoughts, Finally Heard',
   description:
     'Untold — an anonymous digital corkboard for secrets, reflections, and unspoken thoughts. No sign-up needed.',
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
     title: 'Untold — Anonymous Confessions & Reflections',
     description:
       'Drop your unspoken thoughts on a beautiful anonymous corkboard. No sign-up, no judgment.',
+    url: 'https://taleless.vercel.app',
     type: 'website',
   },
 }

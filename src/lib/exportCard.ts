@@ -119,13 +119,13 @@ export async function exportCardAsImage(data: ExportCardData, noteId: string): P
 
   ctx.font = 'bold 26px "Plus Jakarta Sans", sans-serif'
   ctx.fillStyle = 'rgba(45, 42, 38, 0.65)'
-  ctx.fillText('📌 Untold · Anonymous & Unspoken', cardX + 60, footerY)
+  ctx.fillText('✦ Untold · Anonymous & Unspoken', cardX + 60, footerY)
 
   ctx.font = '500 24px "Plus Jakarta Sans", sans-serif'
   ctx.fillStyle = 'rgba(45, 42, 38, 0.45)'
   const domainText = typeof window !== 'undefined' && window.location.host
     ? window.location.host
-    : 'untold-echo.vercel.app'
+    : 'taleless.vercel.app'
   const domainWidth = ctx.measureText(domainText).width
   ctx.fillText(domainText, cardX + cardWidth - 60 - domainWidth, footerY)
 
