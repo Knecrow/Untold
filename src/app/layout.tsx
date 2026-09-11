@@ -6,12 +6,17 @@ export const metadata: Metadata = {
   title: 'Taleless — Your Unspoken Thoughts, Finally Heard',
   description:
     'Taleless — an anonymous digital corkboard for secrets, reflections, and unspoken thoughts. No sign-up needed.',
+  icons: {
+    icon: '/icon.jpg',
+    apple: '/icon.jpg',
+  },
   openGraph: {
     title: 'Taleless — Anonymous Confessions & Reflections',
     description:
       'Drop your unspoken thoughts on a beautiful anonymous corkboard. No sign-up, no judgment.',
     url: 'https://taleless.vercel.app',
     type: 'website',
+    images: ['/logo.jpg'],
   },
 }
 
@@ -23,6 +28,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" type="image/jpeg" href="/icon.jpg" />
+        <link rel="apple-touch-icon" href="/icon.jpg" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

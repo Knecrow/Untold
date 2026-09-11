@@ -37,8 +37,10 @@ export default function AboutSettingsModal({
       <div className="w-full max-w-lg bg-[#F7F4EE] dark:bg-[#181622] text-[#2D2A26] dark:text-[#F4F4F5] border-2 border-black dark:border-white/20 rounded-2xl shadow-neo-lg dark:shadow-[6px_6px_0px_#27272A] overflow-hidden max-h-[90vh] flex flex-col transition-colors">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-black dark:border-white/20 bg-white dark:bg-[#181622] shrink-0 transition-colors">
-          <div className="flex items-center gap-2">
-            <Pin size={18} strokeWidth={2.4} className="text-[#1C1A18] dark:text-white" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 border-2 border-black dark:border-white/30 rounded-lg overflow-hidden flex items-center justify-center shadow-neo-sm shrink-0 bg-white">
+              <img src="/logo.jpg" alt="Taleless" className="w-full h-full object-cover scale-105" />
+            </div>
             <h2 className="font-bold text-lg font-serif text-[#1C1A18] dark:text-white">About Taleless</h2>
           </div>
           <button

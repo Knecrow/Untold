@@ -18,8 +18,12 @@ export default function Header({ onDropNote, onAbout, noteCount, theme, onToggle
 
           {/* Logo / Brand */}
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 bg-[#FFD43B] border-2 border-black rounded-xl flex items-center justify-center shadow-neo-sm flex-shrink-0">
-              <Pin size={17} strokeWidth={2.5} className="text-[#1C1A18]" />
+            <div className="w-9 h-9 border-2 border-black dark:border-white/30 rounded-xl overflow-hidden flex items-center justify-center shadow-neo-sm flex-shrink-0 bg-white">
+              <img
+                src="/logo.jpg"
+                alt="Taleless Logo"
+                className="w-full h-full object-cover scale-105"
+              />
             </div>
             <div className="min-w-0">
               <h1 className="text-xl font-black tracking-tight leading-none text-[#1C1A18] dark:text-white" style={{ fontFamily: 'Instrument Serif, serif' }}>Taleless</h1>

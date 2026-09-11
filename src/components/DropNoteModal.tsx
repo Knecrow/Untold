@@ -102,8 +102,10 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b-2 border-black dark:border-white/20 bg-white dark:bg-[#181622] transition-colors">
-          <div className="flex items-center gap-2">
-            <Pin size={18} strokeWidth={2.5} className="text-[#1C1A18] dark:text-white" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 border-2 border-black dark:border-white/30 rounded-lg overflow-hidden flex items-center justify-center shadow-neo-sm shrink-0 bg-white">
+              <img src="/logo.jpg" alt="Taleless" className="w-full h-full object-cover scale-105" />
+            </div>
             <h2 className="font-bold text-lg font-serif text-[#1C1A18] dark:text-white">Drop a Story on Taleless</h2>
           </div>
           <button
