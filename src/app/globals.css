@@ -102,14 +102,15 @@ body {
   transform: none;
 }
 
-.masonry-item:hover .note-card {
-  transform: translateY(-3px);
-  box-shadow: 6px 6px 0px #000;
+.note-card {
+  box-shadow: 4px 4px 0px 0px #000, 7px 7px 0px 0px var(--shadow-accent, #000);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.2s ease;
 }
 
-.note-card {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.15s ease;
+.masonry-item:hover .note-card {
+  transform: translateY(-4px);
+  box-shadow: 5px 5px 0px 0px #000, 10px 10px 0px 0px var(--shadow-accent, #000);
 }
 
 /* Scrollbar */

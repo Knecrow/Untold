@@ -123,21 +123,29 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
               Category
             </label>
             <div className="flex flex-wrap gap-2">
-              {CATEGORIES.map(c => (
-                <button
-                  type="button"
-                  key={c.id}
-                  onClick={() => setCategory(c.id)}
-                  className="btn-press inline-flex items-center gap-1 border-2 border-black rounded-full px-3 py-1 text-xs font-bold cursor-pointer transition-all"
-                  style={{
-                    backgroundColor: category === c.id ? c.color : 'white',
-                    boxShadow: category === c.id ? '2px 2px 0px 0px #000' : 'none',
-                  }}
-                >
-                  <span>{c.emoji}</span>
-                  <span>{c.label}</span>
-                </button>
-              ))}
+              {CATEGORIES.map(c => {
+                const isSelected = category === c.id
+                return (
+                  <button
+                    type="button"
+                    key={c.id}
+                    onClick={() => setCategory(c.id)}
+                    className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-3 py-1 text-xs font-bold cursor-pointer transition-all"
+                    style={{
+                      backgroundColor: c.color,
+                      boxShadow: isSelected
+                        ? `2px 2px 0px 0px #000, 4px 4px 0px 0px ${c.accentColor || '#000'}`
+                        : '2px 2px 0px 0px #000',
+                      transform: isSelected ? 'translate(-1px, -1px)' : 'none',
+                    }}
+                  >
+                    <span className="font-extrabold" style={{ color: c.accentColor || '#1C1A18' }}>
+                      {c.emoji}
+                    </span>
+                    <span>{c.label}</span>
+                  </button>
+                )
+              })}
             </div>
           </div>
 
@@ -209,11 +217,15 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
           </div>
 
           {/* Preview label */}
-          <div className="text-xs font-semibold opacity-60 flex items-center gap-1.5">
+          <div className="text-xs font-semibold opacity-80 flex items-center gap-2">
             <span>Preview:</span>
-            <span className="inline-flex items-center gap-1 bg-white border-2 border-black rounded-full px-2 py-0.5 text-xs font-bold shadow-neo-sm">
-              <span className="text-xs font-bold text-[#2D2A26]/70">{cat.emoji}</span>
-              <span>{cat.label}</span>
+            <span className="inline-flex items-center gap-1.5 bg-white border-2 border-black rounded-full px-2.5 py-0.5 text-xs font-bold shadow-neo-sm">
+              <span className="text-xs font-black" style={{ color: cat.accentColor || '#1C1A18' }}>
+                {cat.emoji}
+              </span>
+              <span className="font-extrabold text-[11px] uppercase tracking-wider text-[#1C1A18]">
+                {cat.label}
+              </span>
             </span>
           </div>
 
@@ -222,7 +234,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
             id="pin-to-board-btn"
             type="submit"
             disabled={submitting || wordCount < MIN_WORDS || wordCount > MAX_WORDS}
-            className="btn-press w-full flex items-center justify-center gap-2 bg-[#1A1A1A] text-white border-2 border-black rounded-full py-3 font-bold text-sm shadow-neo cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#333] transition-colors"
+            className="btn-press w-full flex items-center justify-center gap-2 bg-[#1A1A1A] text-white border-2 border-black rounded-full py-3 font-extrabold text-sm shadow-[3px_3px_0px_#F43F5E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none hover:bg-black transition-all"
           >
             <Pin size={16} />
             {submitting

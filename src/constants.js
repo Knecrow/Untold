@@ -1,12 +1,12 @@
 // ─── Category definitions (Vintage Muted Stationery Paper Palette) ───────────────
 export const CATEGORIES = [
-  { id: 'small-wins',   label: 'Small Wins',     emoji: '★', color: '#FFFBEB', tapeColor: 'rgba(234, 179, 8, 0.35)', textColor: '#2D2A26' },
-  { id: 'secret-crush', label: 'Secret Crush',   emoji: '♥', color: '#FDF2F4', tapeColor: 'rgba(244, 114, 182, 0.35)', textColor: '#2D2A26' },
-  { id: 'wholesome',   label: 'Wholesome',       emoji: '✿', color: '#F0F7F2', tapeColor: 'rgba(52, 211, 153, 0.35)', textColor: '#2D2A26' },
-  { id: 'silly',       label: 'Silly & Awkward', emoji: '☼', color: '#FEF3E7', tapeColor: 'rgba(251, 146, 60, 0.35)', textColor: '#2D2A26' },
-  { id: 'quiet-hope',  label: 'Quiet Hope',      emoji: '✧', color: '#EDF6FC', tapeColor: 'rgba(56, 189, 248, 0.35)', textColor: '#2D2A26' },
-  { id: 'heavy-heart', label: 'Heavy Heart',     emoji: '☁', color: '#F3F0FA', tapeColor: 'rgba(192, 132, 252, 0.35)', textColor: '#2D2A26' },
-  { id: 'unsent',      label: 'Unsent Letters',  emoji: '✎', color: '#F7F3E8', tapeColor: 'rgba(217, 119, 6, 0.30)', textColor: '#2D2A26' },
+  { id: 'small-wins',   label: 'Small Wins',     emoji: '★', color: '#FEF9C3', accentColor: '#F59E0B', tapeColor: 'rgba(245, 158, 11, 0.4)', textColor: '#1C1A18' },
+  { id: 'secret-crush', label: 'Secret Crush',   emoji: '♥', color: '#FFE4E6', accentColor: '#F43F5E', tapeColor: 'rgba(244, 63, 94, 0.4)', textColor: '#1C1A18' },
+  { id: 'wholesome',   label: 'Wholesome',       emoji: '✿', color: '#DCFCE7', accentColor: '#10B981', tapeColor: 'rgba(16, 185, 129, 0.4)', textColor: '#1C1A18' },
+  { id: 'silly',       label: 'Silly & Awkward', emoji: '☼', color: '#FFEDD5', accentColor: '#F97316', tapeColor: 'rgba(249, 115, 22, 0.4)', textColor: '#1C1A18' },
+  { id: 'quiet-hope',  label: 'Quiet Hope',      emoji: '✧', color: '#E0F2FE', accentColor: '#0284C7', tapeColor: 'rgba(2, 132, 199, 0.4)', textColor: '#1C1A18' },
+  { id: 'heavy-heart', label: 'Heavy Heart',     emoji: '☁', color: '#EDE9FE', accentColor: '#8B5CF6', tapeColor: 'rgba(139, 92, 246, 0.4)', textColor: '#1C1A18' },
+  { id: 'unsent',      label: 'Unsent Letters',  emoji: '✎', color: '#FEF3C7', accentColor: '#D97706', tapeColor: 'rgba(217, 119, 6, 0.4)', textColor: '#1C1A18' },
 ]
 
 export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map(c => [c.id, c]))
