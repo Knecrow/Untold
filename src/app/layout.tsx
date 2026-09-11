@@ -28,8 +28,7 @@ export default function RootLayout({
             __html: `
               try {
                 const saved = localStorage.getItem('taleless:theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (saved === 'dark' || (!saved && prefersDark)) {
+                if (saved === 'dark') {
                   document.documentElement.classList.add('dark');
                 } else {
                   document.documentElement.classList.remove('dark');
