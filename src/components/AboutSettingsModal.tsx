@@ -25,14 +25,14 @@ export default function AboutSettingsModal({ onClose, onClearInteractions }: Pro
       onClick={e => e.target === e.currentTarget && onClose()}
       role="dialog"
       aria-modal="true"
-      aria-label="About Untold & Settings"
+      aria-label="About Taleless & Settings"
     >
       <div className="w-full max-w-lg bg-[#F7F4EE] border-2 border-black rounded-2xl shadow-neo-lg overflow-hidden max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-black bg-white shrink-0">
           <div className="flex items-center gap-2">
             <Pin size={18} strokeWidth={2.4} className="text-[#1C1A18]" />
-            <h2 className="font-bold text-lg font-serif">About Untold</h2>
+            <h2 className="font-bold text-lg font-serif">About Taleless</h2>
           </div>
           <button
             onClick={onClose}
@@ -53,7 +53,7 @@ export default function AboutSettingsModal({ onClose, onClearInteractions }: Pro
               <h3 className="font-bold text-sm text-[#1C1A18] uppercase tracking-wide">The Philosophy</h3>
             </div>
             <p className="text-sm text-[#2D2A26] leading-relaxed mb-3">
-              <strong>Untold</strong> is an anonymous digital corkboard where people share raw, unfiltered thoughts, quiet hopes, micro-confessions, and small wins.
+              <strong>Taleless</strong> is an anonymous digital corkboard where people share raw, unfiltered thoughts, quiet hopes, micro-confessions, and small wins.
             </p>
             <div className="bg-[#FFFBEB] border border-amber-200 rounded-xl p-3 flex items-start gap-2.5">
               <Dices size={18} className="text-amber-600 shrink-0 mt-0.5" />
@@ -101,7 +101,7 @@ export default function AboutSettingsModal({ onClose, onClearInteractions }: Pro
                 rel="noopener noreferrer"
                 className="btn-press inline-flex items-center gap-1.5 bg-white border-2 border-black rounded-full px-3.5 py-1.5 text-xs font-bold shadow-neo-sm hover:bg-neutral-50 transition-colors"
               >
-                <span>⭐ Star Untold on GitHub</span>
+                <span>★ Star on GitHub</span>
                 <ExternalLink size={12} />
               </a>
             </div>

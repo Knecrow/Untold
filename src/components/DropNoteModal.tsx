@@ -104,7 +104,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
         <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b-2 border-black bg-white">
           <div className="flex items-center gap-2">
             <Pin size={18} strokeWidth={2.5} />
-            <h2 className="font-bold text-lg font-serif">Drop an Untold Story</h2>
+            <h2 className="font-bold text-lg font-serif">Drop a Story on Taleless</h2>
           </div>
           <button
             onClick={onClose}

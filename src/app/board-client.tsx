@@ -281,7 +281,7 @@ export default function BoardClient({ initialNotes }: Props) {
       <footer className="border-t-2 border-black mt-16 py-8 bg-[#F7F4EE]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-[#2D2A26]/70">
           <p>
-            Untold · Created with care by{' '}
+            Taleless · Created with care by{' '}
             <a
               href="https://github.com/Knecrow"
               target="_blank"

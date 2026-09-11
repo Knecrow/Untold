@@ -4,7 +4,7 @@ import { apiPostToLocal } from '@/lib/api'
 import BoardClient from './board-client'
 
 export const metadata: Metadata = {
-  title: 'Untold — Your Unspoken Thoughts, Finally Heard',
+  title: 'Taleless — Your Unspoken Thoughts, Finally Heard',
   description:
     'Anonymous. Honest. Heard. Drop your unspoken thoughts — no account needed.',
 }

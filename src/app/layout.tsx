@@ -3,11 +3,11 @@ import './globals.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://taleless.vercel.app'),
-  title: 'Untold — Your Unspoken Thoughts, Finally Heard',
+  title: 'Taleless — Your Unspoken Thoughts, Finally Heard',
   description:
-    'Untold — an anonymous digital corkboard for secrets, reflections, and unspoken thoughts. No sign-up needed.',
+    'Taleless — an anonymous digital corkboard for secrets, reflections, and unspoken thoughts. No sign-up needed.',
   openGraph: {
-    title: 'Untold — Anonymous Confessions & Reflections',
+    title: 'Taleless — Anonymous Confessions & Reflections',
     description:
       'Drop your unspoken thoughts on a beautiful anonymous corkboard. No sign-up, no judgment.',
     url: 'https://taleless.vercel.app',

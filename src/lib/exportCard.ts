@@ -119,7 +119,7 @@ export async function exportCardAsImage(data: ExportCardData, noteId: string): P
 
   ctx.font = 'bold 26px "Plus Jakarta Sans", sans-serif'
   ctx.fillStyle = 'rgba(45, 42, 38, 0.65)'
-  ctx.fillText('✦ Untold · Anonymous & Unspoken', cardX + 60, footerY)
+  ctx.fillText('✦ Taleless · Anonymous & Unspoken', cardX + 60, footerY)
 
   ctx.font = '500 24px "Plus Jakarta Sans", sans-serif'
   ctx.fillStyle = 'rgba(45, 42, 38, 0.45)'
@@ -133,7 +133,7 @@ export async function exportCardAsImage(data: ExportCardData, noteId: string): P
   canvas.toBlob(async blob => {
     if (!blob) return
 
-    const fileName = `untold-${noteId.slice(0, 8)}.png`
+    const fileName = `taleless-${noteId.slice(0, 8)}.png`
     const file = new File([blob], fileName, { type: 'image/png' })
 
     // Try native Web Share API on mobile (supports sharing directly to Instagram / Twitter / WhatsApp)
@@ -141,8 +141,8 @@ export async function exportCardAsImage(data: ExportCardData, noteId: string): P
       try {
         await navigator.share({
           files: [file],
-          title: 'Untold Note',
-          text: `"${data.text.slice(0, 100)}..." via Untold`,
+          title: 'Taleless Story',
+          text: `"${data.text.slice(0, 100)}..." via Taleless`,
         })
         return
       } catch {

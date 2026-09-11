@@ -20,7 +20,7 @@ export default function Header({ onDropNote, onAbout, noteCount }: Props) {
               <Pin size={17} strokeWidth={2.5} className="text-[#1C1A18]" />
             </div>
             <div className="min-w-0">
-              <h1 className="text-xl font-black tracking-tight leading-none text-[#1C1A18]" style={{ fontFamily: 'Instrument Serif, serif' }}>Untold</h1>
+              <h1 className="text-xl font-black tracking-tight leading-none text-[#1C1A18]" style={{ fontFamily: 'Instrument Serif, serif' }}>Taleless</h1>
               <p className="text-xs text-[#2D2A26]/70 font-semibold hidden sm:flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
                 <span>{noteCount} {noteCount === 1 ? 'thought' : 'thoughts'} on the board</span>
