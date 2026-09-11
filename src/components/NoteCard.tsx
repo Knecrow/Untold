@@ -117,45 +117,42 @@ export default function NoteCard({
           </p>
         </div>
 
-        {/* Action bar — vibrant neo-brutalist reaction buttons */}
-        <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-black/10 mt-auto">
+        {/* Action bar — high-contrast neo-brutalist reaction buttons */}
+        <div className="flex items-center gap-2 flex-wrap pt-3.5 border-t-2 border-black/15 mt-auto">
           {/* Star with floating star */}
           <ActionButton
             active={myInteract.starred}
-            defaultBg="#FEF9C3"
             color="#FACC15"
             emoji="★"
             onClick={() => onStar(note.id)}
             title="Star this note"
           >
-            <span className="text-[13px] leading-none font-bold text-[#92400E]">★</span>
-            <span>{note.stars}</span>
+            <span className="text-[13px] leading-none font-black text-[#D97706]">★</span>
+            <span className="font-extrabold">{note.stars}</span>
           </ActionButton>
 
           {/* Heard with floating heart */}
           <ActionButton
             active={myInteract.heard}
-            defaultBg="#FFE4E6"
             color="#FB7185"
             emoji="♥"
             onClick={() => onHeard(note.id)}
             title="I heard this"
           >
-            <span className="text-[13px] leading-none font-bold text-[#BE123C]">♥</span>
-            <span>{note.heard}</span>
+            <span className="text-[13px] leading-none font-black text-[#E11D48]">♥</span>
+            <span className="font-extrabold">{note.heard}</span>
           </ActionButton>
 
           {/* Hug with floating comfort spark */}
           <ActionButton
             active={myInteract.hugged}
-            defaultBg="#E0F2FE"
             color="#38BDF8"
             emoji="✦"
             onClick={() => onHug(note.id)}
             title="Send comfort"
           >
-            <span className="text-[13px] leading-none font-bold text-[#0369A1]">✦</span>
-            <span>{note.hug}</span>
+            <span className="text-[13px] leading-none font-black text-[#0284C7]">✦</span>
+            <span className="font-extrabold">{note.hug}</span>
           </ActionButton>
 
           {/* Export as Image Card & Share */}
@@ -164,8 +161,7 @@ export default function NoteCard({
               onClick={handleExport}
               disabled={exporting}
               title="Save as Image (Share to Instagram/Twitter)"
-              className="btn-press inline-flex items-center gap-1 border border-black/20 rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer hover:border-black hover:bg-white transition-all shadow-sm"
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }}
+              className="btn-press inline-flex items-center gap-1 bg-white border-2 border-black rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer hover:bg-neutral-50 transition-all shadow-[2px_2px_0px_#000]"
             >
               <Camera size={11} />
               <span>{exporting ? 'Saving…' : 'Card'}</span>
@@ -174,14 +170,13 @@ export default function NoteCard({
             <button
               onClick={handleShare}
               title="Copy link"
-              className="btn-press inline-flex items-center gap-1 border border-black/20 rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer hover:border-black hover:bg-white transition-all shadow-sm"
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }}
+              className="btn-press inline-flex items-center gap-1 bg-white border-2 border-black rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer hover:bg-neutral-50 transition-all shadow-[2px_2px_0px_#000]"
             >
               <Share2 size={11} />
               <span>Share</span>
             </button>
             {showTooltip && (
-              <div className="tooltip-animate absolute bottom-full right-0 mb-2 bg-[#1A1A1A] text-white text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap pointer-events-none">
+              <div className="tooltip-animate absolute bottom-full right-0 mb-2 bg-[#1A1A1A] text-white text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap pointer-events-none shadow-neo-sm">
                 ✓ Copied!
               </div>
             )}
@@ -194,7 +189,6 @@ export default function NoteCard({
 
 interface ActionButtonProps {
   active: boolean
-  defaultBg?: string
   color: string
   emoji?: string
   onClick: () => void
@@ -202,7 +196,7 @@ interface ActionButtonProps {
   children: React.ReactNode
 }
 
-function ActionButton({ active, defaultBg, color, emoji, onClick, title, children }: ActionButtonProps) {
+function ActionButton({ active, color, emoji, onClick, title, children }: ActionButtonProps) {
   const [popped, setPopped] = useState(false)
   const [flourish, setFlourish] = useState<number[]>([])
 
@@ -239,11 +233,10 @@ function ActionButton({ active, defaultBg, color, emoji, onClick, title, childre
       <button
         onClick={handleClick}
         title={title}
-        className="btn-press inline-flex items-center gap-1.5 border border-black/25 rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer transition-all hover:border-black"
+        className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer transition-all hover:bg-neutral-50"
         style={{
-          backgroundColor: active ? color : (defaultBg || 'rgba(255, 255, 255, 0.75)'),
-          borderColor: active ? '#000000' : 'rgba(0, 0, 0, 0.3)',
-          boxShadow: active ? '2px 2px 0px 0px #000' : '1px 1px 0px 0px rgba(0, 0, 0, 0.2)',
+          backgroundColor: active ? color : '#FFFFFF',
+          boxShadow: '2px 2px 0px 0px #000',
         }}
       >
         <span className={popped ? 'sparkle' : ''}>{children}</span>
