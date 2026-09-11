@@ -18,11 +18,11 @@ export default function Header({ onDropNote, onAbout, noteCount, theme, onToggle
 
           {/* Logo / Brand */}
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 border-2 border-black dark:border-white/30 rounded-xl overflow-hidden flex items-center justify-center shadow-neo-sm flex-shrink-0 bg-white">
+            <div className="w-9 h-9 border-2 border-black dark:border-white/30 rounded-xl overflow-hidden flex items-center justify-center shadow-neo-sm flex-shrink-0 bg-white p-1">
               <img
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Taleless Logo"
-                className="w-full h-full object-cover scale-105"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="min-w-0">
