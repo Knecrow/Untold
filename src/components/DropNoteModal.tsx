@@ -84,31 +84,31 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
   }
 
   const counterClass = wordCount > MAX_WORDS
-    ? 'text-red-600 font-extrabold'
+    ? 'text-red-600 dark:text-red-400 font-extrabold'
     : wordCount < MIN_WORDS
-      ? 'text-[#8C6D3B] font-semibold'
-      : 'text-emerald-700 font-bold'
+      ? 'text-[#8C6D3B] dark:text-amber-400 font-semibold'
+      : 'text-emerald-700 dark:text-emerald-400 font-bold'
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop bg-black/30"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop bg-black/40 dark:bg-black/70 backdrop-blur-xs"
       onClick={(e) => e.target === e.currentTarget && onClose()}
       role="dialog"
       aria-modal="true"
       aria-label="Drop a note"
     >
       <div
-        className="w-full max-w-lg bg-white border-2 border-black rounded-2xl shadow-neo-lg overflow-hidden"
+        className="w-full max-w-lg bg-white dark:bg-[#181622] text-[#1C1A18] dark:text-[#F4F4F5] border-2 border-black dark:border-white/20 rounded-2xl shadow-neo-lg dark:shadow-[6px_6px_0px_#27272A] overflow-hidden transition-colors"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b-2 border-black bg-white">
+        <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b-2 border-black dark:border-white/20 bg-white dark:bg-[#181622] transition-colors">
           <div className="flex items-center gap-2">
-            <Pin size={18} strokeWidth={2.5} />
-            <h2 className="font-bold text-lg font-serif">Drop a Story on Taleless</h2>
+            <Pin size={18} strokeWidth={2.5} className="text-[#1C1A18] dark:text-white" />
+            <h2 className="font-bold text-lg font-serif text-[#1C1A18] dark:text-white">Drop a Story on Taleless</h2>
           </div>
           <button
             onClick={onClose}
-            className="btn-press p-1.5 rounded-full border-2 border-black bg-white shadow-neo-sm cursor-pointer hover:bg-gray-50"
+            className="btn-press p-1.5 rounded-full border-2 border-black dark:border-white/20 bg-white dark:bg-[#27272A] text-[#1C1A18] dark:text-white shadow-neo-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
             aria-label="Close modal"
           >
             <X size={16} strokeWidth={2.5} />
@@ -119,7 +119,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
 
           {/* Category picker */}
           <div>
-            <label className="block text-xs font-bold mb-2 uppercase tracking-wide text-[#1A1A1A]">
+            <label className="block text-xs font-bold mb-2 uppercase tracking-wide text-[#1A1A1A] dark:text-neutral-300">
               Category
             </label>
             <div className="flex flex-wrap gap-2">
@@ -142,7 +142,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
                     <span className="font-extrabold" style={{ color: c.accentColor || '#1C1A18' }}>
                       {c.emoji}
                     </span>
-                    <span>{c.label}</span>
+                    <span className="text-[#1C1A18]">{c.label}</span>
                   </button>
                 )
               })}
@@ -152,10 +152,10 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
           {/* Text area */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-xs font-bold uppercase tracking-wide text-[#1A1A1A]" htmlFor="note-text">
+              <label className="block text-xs font-bold uppercase tracking-wide text-[#1A1A1A] dark:text-neutral-300" htmlFor="note-text">
                 Your Story or Occurrence
               </label>
-              <span className="text-[11px] font-bold text-gray-500 bg-gray-100 border border-black/20 rounded-full px-2 py-0.5">
+              <span className="text-[11px] font-bold text-gray-500 dark:text-neutral-400 bg-gray-100 dark:bg-neutral-800 border border-black/20 dark:border-white/20 rounded-full px-2 py-0.5">
                 50 – 150 words
               </span>
             </div>
@@ -168,7 +168,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
                 onChange={e => { setText(e.target.value); setError('') }}
                 placeholder="Tell us about a small moment, an encounter, or an occurrence from your life that you've never shared before... (at least 50 words)"
                 rows={7}
-                className="w-full bg-white border-2 border-black rounded-xl p-3 text-sm font-semibold resize-none placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black/30"
+                className="w-full bg-white dark:bg-[#121118] text-[#1C1A18] dark:text-white border-2 border-black dark:border-white/20 rounded-xl p-3 text-sm font-semibold resize-none placeholder:text-gray-400 dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-black/30 dark:focus:ring-white/30"
                 style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
               />
             </div>
@@ -176,17 +176,17 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
             {/* Word count progress row */}
             <div className="flex items-center justify-between mt-2 text-xs">
               {wordCount < MIN_WORDS ? (
-                <span className="text-[#8C6D3B] font-semibold flex items-center gap-1">
+                <span className="text-[#8C6D3B] dark:text-amber-400 font-semibold flex items-center gap-1">
                   <span className="text-[13px] leading-none">✎</span>
                   <span>{MIN_WORDS - wordCount} more words needed</span>
                 </span>
               ) : wordCount <= MAX_WORDS ? (
-                <span className="text-emerald-700 font-bold flex items-center gap-1">
+                <span className="text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-1">
                   <span className="text-[13px] leading-none">✦</span>
                   <span>Ready to pin to board</span>
                 </span>
               ) : (
-                <span className="text-red-600 font-extrabold flex items-center gap-1">
+                <span className="text-red-600 dark:text-red-400 font-extrabold flex items-center gap-1">
                   <span className="text-[11px] leading-none">▲</span>
                   <span>{wordCount - MAX_WORDS} words over limit</span>
                 </span>
@@ -198,7 +198,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
             </div>
 
             {error && (
-              <p className="mt-1.5 text-xs font-semibold text-red-600">{error}</p>
+              <p className="mt-1.5 text-xs font-semibold text-red-600 dark:text-red-400">{error}</p>
             )}
           </div>
 
@@ -219,11 +219,11 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
           {/* Preview label */}
           <div className="text-xs font-semibold opacity-80 flex items-center gap-2">
             <span>Preview:</span>
-            <span className="inline-flex items-center gap-1.5 bg-white border-2 border-black rounded-full px-2.5 py-0.5 text-xs font-bold shadow-neo-sm">
+            <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#27272A] border-2 border-black dark:border-white/20 rounded-full px-2.5 py-0.5 text-xs font-bold shadow-neo-sm">
               <span className="text-xs font-black" style={{ color: cat.accentColor || '#1C1A18' }}>
                 {cat.emoji}
               </span>
-              <span className="font-extrabold text-[11px] uppercase tracking-wider text-[#1C1A18]">
+              <span className="font-extrabold text-[11px] uppercase tracking-wider text-[#1C1A18] dark:text-white">
                 {cat.label}
               </span>
             </span>
@@ -234,7 +234,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
             id="pin-to-board-btn"
             type="submit"
             disabled={submitting || wordCount < MIN_WORDS || wordCount > MAX_WORDS}
-            className="btn-press w-full flex items-center justify-center gap-2 bg-[#1A1A1A] text-white border-2 border-black rounded-full py-3 font-extrabold text-sm shadow-[3px_3px_0px_#F43F5E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none hover:bg-black transition-all"
+            className="btn-press w-full flex items-center justify-center gap-2 bg-[#1A1A1A] dark:bg-white text-white dark:text-[#1A1A1A] border-2 border-black dark:border-white rounded-full py-3 font-extrabold text-sm shadow-[3px_3px_0px_#F43F5E] dark:shadow-[3px_3px_0px_#38BDF8] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none hover:bg-black dark:hover:bg-neutral-100 transition-all"
           >
             <Pin size={16} />
             {submitting

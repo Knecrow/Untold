@@ -26,15 +26,13 @@ export default function FilterBar({ active, onChange }: Props) {
                 key={cat.id}
                 id={`filter-${cat.id}`}
                 onClick={() => onChange(cat.id)}
-                className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-4 py-1.5 text-xs sm:text-sm font-extrabold whitespace-nowrap cursor-pointer transition-all"
-                style={{
-                  backgroundColor: isActive ? '#18181B' : '#FFFFFF',
-                  color: isActive ? '#FFFFFF' : '#18181B',
-                  boxShadow: isActive ? '3px 3px 0px 0px #F59E0B' : '2px 2px 0px 0px #000',
-                  transform: isActive ? 'translate(-1px, -1px)' : 'none',
-                }}
+                className={`btn-press inline-flex items-center gap-1.5 border-2 rounded-full px-4 py-1.5 text-xs sm:text-sm font-extrabold whitespace-nowrap cursor-pointer transition-all ${
+                  isActive
+                    ? 'bg-[#18181B] text-white border-black dark:bg-white dark:text-[#18181B] dark:border-white shadow-[3px_3px_0px_0px_#F59E0B] -translate-x-[1px] -translate-y-[1px]'
+                    : 'bg-white text-[#18181B] border-black dark:bg-[#27272A] dark:text-white dark:border-white/30 shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.25)]'
+                }`}
               >
-                <span style={{ color: isActive ? '#FFD43B' : '#F59E0B' }}>✦</span>
+                <span className={isActive ? 'text-[#FFD43B] dark:text-amber-500' : 'text-[#F59E0B]'}>✦</span>
                 <span>All</span>
               </button>
             )

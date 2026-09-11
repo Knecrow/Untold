@@ -32,6 +32,12 @@ body {
   color: #2D2A26;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+html.dark body {
+  background-color: #121118;
+  color: #F4F4F5;
 }
 
 /* Dotted canvas texture with warm paper feel */
@@ -39,6 +45,12 @@ body {
   background-color: #F7F4EE;
   background-image: radial-gradient(circle, #2D2A2614 1.2px, transparent 1.2px);
   background-size: 24px 24px;
+  transition: background-color 0.25s ease;
+}
+
+html.dark .canvas-texture {
+  background-color: #121118;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
 }
 
 
@@ -113,10 +125,20 @@ body {
   box-shadow: 5px 5px 0px 0px #000, 10px 10px 0px 0px var(--shadow-accent, #000);
 }
 
+html.dark .note-card {
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.12), 4px 4px 0px 0px #000, 7px 7px 0px 0px var(--shadow-accent, #000);
+}
+
+html.dark .masonry-item:hover .note-card {
+  transform: translateY(-4px);
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.22), 5px 5px 0px 0px #000, 10px 10px 0px 0px var(--shadow-accent, #000);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #00000030; border-radius: 999px; }
+html.dark ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
 
 /* Filter bar scroll */
 .filter-scroll {

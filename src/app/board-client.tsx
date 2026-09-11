@@ -8,6 +8,7 @@ import DropNoteModal from '@/components/DropNoteModal'
 import AboutSettingsModal from '@/components/AboutSettingsModal'
 import { apiGetLatestPosts, apiToggleReaction, apiPostToLocal, apiFlagPost } from '@/lib/api'
 import { SEED_NOTES } from '@/constants'
+import { Pin } from 'lucide-react'
 
 // ─── Fisher-Yates Random Shuffle ─────────────────────────────────────────────
 function shuffleArray<T>(array: T[]): T[] {
@@ -79,6 +80,7 @@ export default function BoardClient({ initialNotes }: Props) {
   const [newNoteId, setNewNoteId]         = useState<string | null>(null)
   const [hiddenIds, setHiddenIds]         = useState<Set<string>>(new Set())
   const [loading, setLoading]            = useState(false)
+  const [theme, setTheme]                = useState<'light' | 'dark'>('light')
 
   // ─── Hydrate from localStorage & Randomize on initial load ────────────────
   useEffect(() => {
@@ -86,7 +88,24 @@ export default function BoardClient({ initialNotes }: Props) {
     setActiveFilter(loadFilter())
     setHiddenIds(loadHidden())
     setNotes(prev => shuffleArray(prev))
+    const isDark = document.documentElement.classList.contains('dark')
+    setTheme(isDark ? 'dark' : 'light')
     setHydrated(true)
+  }, [])
+
+  const handleToggleTheme = useCallback(() => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark'
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+      try {
+        localStorage.setItem('taleless:theme', next)
+      } catch {}
+      return next
+    })
   }, [])
 
   // ─── Flag & hide note ─────────────────────────────────────────────────────
@@ -238,6 +257,8 @@ export default function BoardClient({ initialNotes }: Props) {
           onDropNote={() => setShowDropModal(true)}
           onAbout={() => setShowAbout(true)}
           noteCount={notes.length}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
 
         {/* Main content */}
@@ -245,7 +266,7 @@ export default function BoardClient({ initialNotes }: Props) {
 
           {/* Hero tagline */}
           <div className="mb-6 text-center sm:text-left">
-            <p className="text-base font-medium text-[#2D2A26]/70 max-w-xl">
+            <p className="text-base font-medium text-[#2D2A26]/70 dark:text-neutral-400 max-w-xl transition-colors">
               Anonymous. Ephemeral. Pure chance. Every refresh re-deals the board so every quiet thought has an equal chance to be heard.
             </p>
           </div>
@@ -257,7 +278,7 @@ export default function BoardClient({ initialNotes }: Props) {
 
           {/* Note count for current filter */}
           <div className="flex items-center justify-between mb-4">
-            <p className="text-xs font-semibold text-[#2D2A26]/50 uppercase tracking-wide">
+            <p className="text-xs font-semibold text-[#2D2A26]/50 dark:text-neutral-400 uppercase tracking-wide">
               {filteredNotes.length} {filteredNotes.length === 1 ? 'thought' : 'thoughts'}
               {activeFilter !== 'all' && ' in this category'}
             </p>
@@ -278,15 +299,15 @@ export default function BoardClient({ initialNotes }: Props) {
       </div>
 
       {/* Footer */}
-      <footer className="border-t-2 border-black mt-16 py-8 bg-[#F7F4EE]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-[#2D2A26]/70">
+      <footer className="border-t-2 border-black dark:border-white/20 mt-16 py-8 bg-[#F7F4EE] dark:bg-[#181622] transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-[#2D2A26]/70 dark:text-neutral-400">
           <p>
             Taleless · Created with care by{' '}
             <a
               href="https://github.com/Knecrow"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black underline font-bold hover:text-neutral-700"
+              className="text-black dark:text-white underline font-bold hover:text-neutral-700 dark:hover:text-neutral-300"
             >
               Syed Nahian (@Knecrow)
             </a>
@@ -294,7 +315,7 @@ export default function BoardClient({ initialNotes }: Props) {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setShowAbout(true)}
-              className="underline hover:text-black cursor-pointer font-bold"
+              className="underline hover:text-black dark:hover:text-white cursor-pointer font-bold"
             >
               About & Settings
             </button>
@@ -302,7 +323,7 @@ export default function BoardClient({ initialNotes }: Props) {
               href="https://github.com/Knecrow/Untold"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-black font-bold"
+              className="underline hover:text-black dark:hover:text-white font-bold"
             >
               GitHub
             </a>
@@ -314,10 +335,10 @@ export default function BoardClient({ initialNotes }: Props) {
       <button
         id="fab-drop-note"
         onClick={() => setShowDropModal(true)}
-        className="btn-press fixed bottom-6 right-5 z-40 sm:hidden flex items-center justify-center w-14 h-14 bg-[#1C1A18] text-white border-2 border-black rounded-full shadow-neo text-2xl cursor-pointer"
+        className="btn-press fixed bottom-6 right-5 z-40 sm:hidden flex items-center justify-center w-14 h-14 bg-[#1C1A18] dark:bg-white text-white dark:text-[#1C1A18] border-2 border-black dark:border-white rounded-full shadow-[3px_3px_0px_#F43F5E] cursor-pointer"
         aria-label="Drop a note"
       >
-        📌
+        <Pin size={22} />
       </button>
 
       {/* Modals */}
@@ -335,6 +356,8 @@ export default function BoardClient({ initialNotes }: Props) {
             setInteractions({})
             localStorage.removeItem(LS_INTERACTIONS)
           }}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
       )}
     </div>
