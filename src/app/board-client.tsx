@@ -299,15 +299,15 @@ export default function BoardClient({ initialNotes }: Props) {
       </div>
 
       {/* Footer */}
-      <footer className="border-t-2 border-black dark:border-white/20 mt-16 py-8 bg-[#F7F4EE] dark:bg-[#181622] transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-[#2D2A26]/70 dark:text-neutral-400">
+      <footer className="border-t-2 border-black/80 dark:border-white/10 mt-16 py-8 glass-header border-b-0 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-[#1A1714]/70 dark:text-white/60">
           <p>
             Taleless · Created with care by{' '}
             <a
               href="https://github.com/Knecrow"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black dark:text-white underline font-bold hover:text-neutral-700 dark:hover:text-neutral-300"
+              className="text-[#1A1714] dark:text-white underline font-bold hover:text-neutral-700 dark:hover:text-neutral-300"
             >
               Syed Nahian (@Knecrow)
             </a>
@@ -335,7 +335,7 @@ export default function BoardClient({ initialNotes }: Props) {
       <button
         id="fab-drop-note"
         onClick={() => setShowDropModal(true)}
-        className="btn-press fixed bottom-6 right-5 z-40 sm:hidden flex items-center justify-center w-14 h-14 bg-[#1C1A18] dark:bg-white text-white dark:text-[#1C1A18] border-2 border-black dark:border-white rounded-full shadow-[3px_3px_0px_#F43F5E] cursor-pointer"
+        className="btn-press fixed bottom-6 right-5 z-40 sm:hidden flex items-center justify-center w-14 h-14 bg-[#1A1714] dark:bg-white/90 text-white dark:text-[#1A1714] border-2 border-black/80 dark:border-white/80 rounded-full shadow-[3px_3px_0px_#F43F5E] dark:shadow-[3px_3px_0px_#818CF8] cursor-pointer backdrop-blur-sm"
         aria-label="Drop a note"
       >
         <Pin size={22} />

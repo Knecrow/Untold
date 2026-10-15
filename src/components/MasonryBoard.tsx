@@ -18,10 +18,12 @@ interface Props {
 export default function MasonryBoard({ notes, interactions, onStar, onHeard, onHug, onShare, onFlag, newNoteId }: Props) {
   if (notes.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center">
-        <Inbox size={42} strokeWidth={1.75} className="text-[#2D2A26]/40 mb-3" />
-        <h3 className="text-lg font-bold text-[#1A1A1A] mb-2">Nothing here yet</h3>
-        <p className="text-sm text-gray-500 max-w-xs font-medium">
+      <div className="glass-panel rounded-3xl p-10 max-w-md mx-auto my-16 flex flex-col items-center justify-center text-center shadow-neo-sm">
+        <div className="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center mb-3">
+          <Inbox size={22} strokeWidth={2} className="text-[#1A1714]/60 dark:text-white/60" />
+        </div>
+        <h3 className="text-lg font-bold text-[#1A1714] dark:text-white mb-1.5">Nothing here yet</h3>
+        <p className="text-sm text-[#1A1714]/60 dark:text-white/60 font-medium max-w-xs">
           No notes match this filter. Try another category or be the first to drop one!
         </p>
       </div>

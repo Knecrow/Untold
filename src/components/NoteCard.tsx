@@ -103,7 +103,7 @@ export default function NoteCard({
             <button
               onClick={handleFlag}
               title="Flag as inappropriate"
-              className="p-1 text-[#2D2A26]/40 hover:text-rose-600 transition-colors cursor-pointer rounded-full hover:bg-black/5"
+              className="p-1 text-[#1A1714]/40 dark:text-white/40 hover:text-rose-600 dark:hover:text-rose-400 transition-colors cursor-pointer rounded-full hover:bg-black/5 dark:hover:bg-white/10"
               aria-label="Flag note"
             >
               <Flag size={12} />
