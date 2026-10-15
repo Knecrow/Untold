@@ -98,19 +98,19 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
       aria-label="Drop a note"
     >
       <div
-        className="w-full max-w-lg bg-white dark:bg-[#181622] text-[#1C1A18] dark:text-[#F4F4F5] border-2 border-black dark:border-white/20 rounded-2xl shadow-neo-lg dark:shadow-[6px_6px_0px_#27272A] overflow-hidden transition-colors"
+        className="w-full max-w-lg glass-modal text-[#1A1714] dark:text-[#F0EFF4] border-2 border-black/80 dark:border-white/12 rounded-2xl shadow-neo-lg dark:shadow-[5px_5px_0px_rgba(255,255,255,0.08)] overflow-hidden transition-colors"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b-2 border-black dark:border-white/20 bg-white dark:bg-[#181622] transition-colors">
+        <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-black/15 dark:border-white/10 bg-white/30 dark:bg-white/5 backdrop-blur-sm transition-colors">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 border-2 border-black dark:border-white/30 rounded-lg overflow-hidden flex items-center justify-center shadow-neo-sm shrink-0 bg-white p-0.5">
+            <div className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center shadow-neo-sm shrink-0 bg-white/80 dark:bg-white/10 backdrop-blur-sm border-2 border-black/75 dark:border-white/20 p-0.5">
               <img src="/logo.png" alt="Taleless" className="w-full h-full object-contain" />
             </div>
-            <h2 className="font-bold text-lg font-serif text-[#1C1A18] dark:text-white">Drop a Story on Taleless</h2>
+            <h2 className="font-bold text-lg font-serif text-[#1A1714] dark:text-white">Drop a Story on Taleless</h2>
           </div>
           <button
             onClick={onClose}
-            className="btn-press p-1.5 rounded-full border-2 border-black dark:border-white/20 bg-white dark:bg-[#27272A] text-[#1C1A18] dark:text-white shadow-neo-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors"
+            className="btn-press glass-btn p-1.5 rounded-full cursor-pointer text-[#1A1714] dark:text-white"
             aria-label="Close modal"
           >
             <X size={16} strokeWidth={2.5} />
@@ -132,19 +132,19 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
                     type="button"
                     key={c.id}
                     onClick={() => setCategory(c.id)}
-                    className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-3 py-1 text-xs font-bold cursor-pointer transition-all"
+                    className="btn-press glass-btn inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold cursor-pointer transition-all"
                     style={{
-                      backgroundColor: c.color,
+                      background: isSelected ? `${c.color}E8` : undefined,
                       boxShadow: isSelected
-                        ? `2px 2px 0px 0px #000, 4px 4px 0px 0px ${c.accentColor || '#000'}`
-                        : '2px 2px 0px 0px #000',
-                      transform: isSelected ? 'translate(-1px, -1px)' : 'none',
+                        ? `2px 2px 0px 0px rgba(0,0,0,0.72), 4px 4px 0px 0px ${c.accentColor || '#000'}`
+                        : undefined,
+                      transform: isSelected ? 'translate(-1px, -1px)' : undefined,
                     }}
                   >
-                    <span className="font-extrabold" style={{ color: c.accentColor || '#1C1A18' }}>
+                    <span className="font-extrabold" style={{ color: c.accentColor || '#1A1714' }}>
                       {c.emoji}
                     </span>
-                    <span className="text-[#1C1A18]">{c.label}</span>
+                    <span className="text-[#1A1714] dark:text-white/85">{c.label}</span>
                   </button>
                 )
               })}
@@ -170,7 +170,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
                 onChange={e => { setText(e.target.value); setError('') }}
                 placeholder="Tell us about a small moment, an encounter, or an occurrence from your life that you've never shared before... (at least 50 words)"
                 rows={7}
-                className="w-full bg-white dark:bg-[#121118] text-[#1C1A18] dark:text-white border-2 border-black dark:border-white/20 rounded-xl p-3 text-sm font-semibold resize-none placeholder:text-gray-400 dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-black/30 dark:focus:ring-white/30"
+                className="w-full bg-white/60 dark:bg-white/5 backdrop-blur-sm text-[#1A1714] dark:text-white border-2 border-black/75 dark:border-white/15 rounded-xl p-3 text-sm font-semibold resize-none placeholder:text-[#1A1714]/40 dark:placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-black/25 dark:focus:ring-white/20 focus:bg-white/75 dark:focus:bg-white/8 transition-all"
                 style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
               />
             </div>
@@ -221,11 +221,11 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
           {/* Preview label */}
           <div className="text-xs font-semibold opacity-80 flex items-center gap-2">
             <span>Preview:</span>
-            <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#27272A] border-2 border-black dark:border-white/20 rounded-full px-2.5 py-0.5 text-xs font-bold shadow-neo-sm">
-              <span className="text-xs font-black" style={{ color: cat.accentColor || '#1C1A18' }}>
+            <span className="glass-pill inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold">
+              <span className="text-xs font-black" style={{ color: cat.accentColor || '#1A1714' }}>
                 {cat.emoji}
               </span>
-              <span className="font-extrabold text-[11px] uppercase tracking-wider text-[#1C1A18] dark:text-white">
+              <span className="font-extrabold text-[11px] uppercase tracking-wider text-[#1A1714] dark:text-white/85">
                 {cat.label}
               </span>
             </span>
@@ -236,7 +236,7 @@ export default function DropNoteModal({ onClose, onSubmit }: Props) {
             id="pin-to-board-btn"
             type="submit"
             disabled={submitting || wordCount < MIN_WORDS || wordCount > MAX_WORDS}
-            className="btn-press w-full flex items-center justify-center gap-2 bg-[#1A1A1A] dark:bg-white text-white dark:text-[#1A1A1A] border-2 border-black dark:border-white rounded-full py-3 font-extrabold text-sm shadow-[3px_3px_0px_#F43F5E] dark:shadow-[3px_3px_0px_#38BDF8] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none hover:bg-black dark:hover:bg-neutral-100 transition-all"
+            className="btn-press w-full flex items-center justify-center gap-2 bg-[#1A1714] dark:bg-white/90 text-white dark:text-[#1A1714] border-2 border-black/80 dark:border-white/80 rounded-full py-3 font-extrabold text-sm shadow-[3px_3px_0px_#F43F5E] dark:shadow-[3px_3px_0px_#818CF8] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none hover:opacity-90 transition-all"
           >
             <Pin size={16} />
             {submitting

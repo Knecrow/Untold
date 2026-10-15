@@ -19,45 +19,46 @@ export default function FilterBar({ active, onChange }: Props) {
           const isAll = cat.id === 'all'
           const isActive = active === cat.id
 
-          // All button styling
+          // All button
           if (isAll) {
             return (
               <button
                 key={cat.id}
                 id={`filter-${cat.id}`}
                 onClick={() => onChange(cat.id)}
-                className={`btn-press inline-flex items-center gap-1.5 border-2 rounded-full px-4 py-1.5 text-xs sm:text-sm font-extrabold whitespace-nowrap cursor-pointer transition-all ${
+                className={`btn-press inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs sm:text-sm font-extrabold whitespace-nowrap cursor-pointer transition-all ${
                   isActive
-                    ? 'bg-[#18181B] text-white border-black dark:bg-white dark:text-[#18181B] dark:border-white shadow-[3px_3px_0px_0px_#F59E0B] -translate-x-[1px] -translate-y-[1px]'
-                    : 'bg-white text-[#18181B] border-black dark:bg-[#27272A] dark:text-white dark:border-white/30 shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.25)]'
+                    ? 'bg-[#1A1714] dark:bg-white/90 text-white dark:text-[#1A1714] border-2 border-black/80 dark:border-white/80 shadow-[3px_3px_0px_0px_#F59E0B] -translate-x-[1px] -translate-y-[1px]'
+                    : 'glass-btn text-[#1A1714] dark:text-white/90'
                 }`}
               >
-                <span className={isActive ? 'text-[#FFD43B] dark:text-amber-500' : 'text-[#F59E0B]'}>✦</span>
+                <span className={isActive ? 'text-[#FFD43B]' : 'text-[#F59E0B]'}>✦</span>
                 <span>All</span>
               </button>
             )
           }
 
-          // Category pills: always colorful with tactile neo-brutalist shadows
+          // Category pills
           return (
             <button
               key={cat.id}
               id={`filter-${cat.id}`}
               onClick={() => onChange(cat.id)}
-              className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-bold whitespace-nowrap cursor-pointer transition-all hover:-translate-y-0.5"
+              className="btn-press glass-btn inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-bold whitespace-nowrap cursor-pointer transition-all"
               style={{
-                backgroundColor: cat.color,
-                color: '#1C1A18',
+                background: isActive
+                  ? `${cat.color}E8`
+                  : undefined,
                 boxShadow: isActive
-                  ? `3px 3px 0px 0px #000, 5px 5px 0px 0px ${cat.accentColor || '#000'}`
-                  : '2px 2px 0px 0px #000',
-                transform: isActive ? 'translate(-1px, -1px)' : 'none',
+                  ? `3px 3px 0px 0px rgba(0,0,0,0.72), 5px 5px 0px 0px ${cat.accentColor || '#000'}`
+                  : undefined,
+                transform: isActive ? 'translate(-1px, -1px)' : undefined,
               }}
             >
-              <span className="font-extrabold" style={{ color: cat.accentColor || '#1C1A18' }}>
+              <span className="font-extrabold" style={{ color: cat.accentColor || '#1A1714' }}>
                 {cat.emoji}
               </span>
-              <span>{cat.label}</span>
+              <span className="text-[#1A1714] dark:text-white/85">{cat.label}</span>
             </button>
           )
         })}

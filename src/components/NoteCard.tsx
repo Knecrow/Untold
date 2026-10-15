@@ -81,22 +81,21 @@ export default function NoteCard({
   return (
     <div className={`masonry-item ${isNew ? 'pin-drop' : ''}`}>
       <div
-        className={`note-card ${tierClass} w-full flex flex-col justify-between border-2 border-black rounded-2xl p-6 select-none transition-all duration-200`}
+        className={`note-card ${tierClass} w-full flex flex-col justify-between rounded-2xl p-6 select-none transition-all duration-200`}
         style={
           {
-            backgroundColor: cat.color || '#FFFDF5',
-            '--shadow-accent': cat.accentColor || '#000',
+            '--shadow-accent': cat.accentColor || '#1A1714',
           } as React.CSSProperties
         }
       >
         <div>
           {/* Top bar — sticker category badge & discreet flag */}
           <div className="flex items-center justify-between mb-4 text-xs select-none">
-            <div className="inline-flex items-center gap-1.5 bg-white border-2 border-black rounded-full px-2.5 py-0.5 shadow-neo-sm">
-              <span className="text-xs font-black" style={{ color: cat.accentColor || '#1C1A18' }}>
+            <div className="glass-pill inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5">
+              <span className="text-xs font-black" style={{ color: cat.accentColor || '#1A1714' }}>
                 {cat.emoji}
               </span>
-              <span className="font-extrabold text-[11px] uppercase tracking-wider text-[#1C1A18]">
+              <span className="font-extrabold text-[11px] uppercase tracking-wider text-[#1A1714] dark:text-white/85">
                 {cat.label}
               </span>
             </div>
@@ -112,13 +111,13 @@ export default function NoteCard({
           </div>
 
           {/* Body text — the hero of the card */}
-          <p className="font-medium leading-[1.65] text-[#1C1A18] mb-6 break-words tracking-[-0.01em] text-[1.05rem] sm:text-[1.1rem]">
+          <p className="font-medium leading-[1.65] text-[#1A1714] dark:text-white/90 mb-6 break-words tracking-[-0.01em] text-[1.05rem] sm:text-[1.1rem]">
             {note.text}
           </p>
         </div>
 
         {/* Action bar — high-contrast neo-brutalist reaction buttons */}
-        <div className="flex items-center gap-2 flex-wrap pt-3.5 border-t-2 border-black/15 mt-auto">
+        <div className="flex items-center gap-2 flex-wrap pt-3.5 border-t border-black/12 dark:border-white/10 mt-auto">
           {/* Star with floating star */}
           <ActionButton
             active={myInteract.starred}
@@ -161,7 +160,7 @@ export default function NoteCard({
               onClick={handleExport}
               disabled={exporting}
               title="Save as Image (Share to Instagram/Twitter)"
-              className="btn-press inline-flex items-center gap-1 bg-white border-2 border-black rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer hover:bg-neutral-50 transition-all shadow-[2px_2px_0px_#000]"
+              className="btn-press glass-btn inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold text-[#1A1714] dark:text-white/85 cursor-pointer"
             >
               <Camera size={11} />
               <span>{exporting ? 'Saving…' : 'Card'}</span>
@@ -170,7 +169,7 @@ export default function NoteCard({
             <button
               onClick={handleShare}
               title="Copy link"
-              className="btn-press inline-flex items-center gap-1 bg-white border-2 border-black rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer hover:bg-neutral-50 transition-all shadow-[2px_2px_0px_#000]"
+              className="btn-press glass-btn inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold text-[#1A1714] dark:text-white/85 cursor-pointer"
             >
               <Share2 size={11} />
               <span>Share</span>
@@ -233,10 +232,12 @@ function ActionButton({ active, color, emoji, onClick, title, children }: Action
       <button
         onClick={handleClick}
         title={title}
-        className="btn-press inline-flex items-center gap-1.5 border-2 border-black rounded-full px-2.5 py-1 text-xs font-bold text-[#1C1A18] cursor-pointer transition-all hover:bg-neutral-50"
+        className="btn-press glass-btn inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold text-[#1A1714] dark:text-white/85 cursor-pointer"
         style={{
-          backgroundColor: active ? color : '#FFFFFF',
-          boxShadow: '2px 2px 0px 0px #000',
+          background: active
+            ? `${color}CC`
+            : undefined,
+          borderColor: active ? color : undefined,
         }}
       >
         <span className={popped ? 'sparkle' : ''}>{children}</span>
