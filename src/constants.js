@@ -1,21 +1,15 @@
-// ─── Category definitions (Vintage Muted Stationery Paper Palette) ───────────────
+// ─── Category definitions ──────────────────────────────────────────────────
 export const CATEGORIES = [
-  { id: 'small-wins',   label: 'Small Wins',     emoji: '★', color: '#FEF08A', accentColor: '#EAB308', tapeColor: 'rgba(234, 179, 8, 0.4)', textColor: '#1C1A18' },
-  { id: 'secret-crush', label: 'Secret Crush',   emoji: '♥', color: '#FBCFE8', accentColor: '#EC4899', tapeColor: 'rgba(236, 72, 153, 0.4)', textColor: '#1C1A18' },
-  { id: 'wholesome',   label: 'Wholesome',       emoji: '✿', color: '#BBF7D0', accentColor: '#10B981', tapeColor: 'rgba(16, 185, 129, 0.4)', textColor: '#1C1A18' },
-  { id: 'silly',       label: 'Silly & Awkward', emoji: '☼', color: '#FED7AA', accentColor: '#F97316', tapeColor: 'rgba(249, 115, 22, 0.4)', textColor: '#1C1A18' },
-  { id: 'quiet-hope',  label: 'Quiet Hope',      emoji: '✧', color: '#BAE6FD', accentColor: '#0284C7', tapeColor: 'rgba(2, 132, 199, 0.4)', textColor: '#1C1A18' },
-  { id: 'heavy-heart', label: 'Heavy Heart',     emoji: '☁', color: '#DDD6FE', accentColor: '#8B5CF6', tapeColor: 'rgba(139, 92, 246, 0.4)', textColor: '#1C1A18' },
-  { id: 'unsent',      label: 'Unsent Letters',  emoji: '✎', color: '#EAD7C0', accentColor: '#78350F', tapeColor: 'rgba(120, 53, 15, 0.4)', textColor: '#1C1A18' },
+  { id: 'small-wins',   label: 'Small Wins',     emoji: '★', color: '#FEF08A', accentColor: '#EAB308', textColor: '#1C1A18' },
+  { id: 'secret-crush', label: 'Secret Crush',   emoji: '♥', color: '#FBCFE8', accentColor: '#EC4899', textColor: '#1C1A18' },
+  { id: 'wholesome',   label: 'Wholesome',       emoji: '✿', color: '#BBF7D0', accentColor: '#10B981', textColor: '#1C1A18' },
+  { id: 'silly',       label: 'Silly & Awkward', emoji: '☼', color: '#FED7AA', accentColor: '#F97316', textColor: '#1C1A18' },
+  { id: 'quiet-hope',  label: 'Quiet Hope',      emoji: '✧', color: '#BAE6FD', accentColor: '#0284C7', textColor: '#1C1A18' },
+  { id: 'heavy-heart', label: 'Heavy Heart',     emoji: '☁', color: '#DDD6FE', accentColor: '#8B5CF6', textColor: '#1C1A18' },
+  { id: 'unsent',      label: 'Unsent Letters',  emoji: '✎', color: '#EAD7C0', accentColor: '#78350F', textColor: '#1C1A18' },
 ]
 
 export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map(c => [c.id, c]))
-
-// Tilt classes for organic layout
-export const TILT_CLASSES = [
-  'card-tilt-1', 'card-tilt-2', 'card-tilt-3',
-  'card-tilt-4', 'card-tilt-5', 'card-tilt-6',
-]
 
 // ─── Seed data ───────────────────────────────────────────────────────────────
 export const SEED_NOTES = [

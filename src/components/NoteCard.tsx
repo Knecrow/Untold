@@ -3,7 +3,6 @@
 import { CATEGORY_MAP } from '@/constants'
 import { Share2, Flag, Camera } from 'lucide-react'
 import { useState, useRef } from 'react'
-import { exportCardAsImage } from '@/lib/exportCard'
 import type { LocalNote } from '@/app/board-client'
 
 interface Props {
@@ -52,6 +51,7 @@ export default function NoteCard({
   async function handleExport() {
     setExporting(true)
     try {
+      const { exportCardAsImage } = await import('@/lib/exportCard')
       await exportCardAsImage(
         {
           text: note.text,

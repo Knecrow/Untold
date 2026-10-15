@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useCallback, useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import Header from '@/components/Header'
 import FilterBar from '@/components/FilterBar'
 import MasonryBoard from '@/components/MasonryBoard'
-import DropNoteModal from '@/components/DropNoteModal'
-import AboutSettingsModal from '@/components/AboutSettingsModal'
+
+const DropNoteModal = dynamic(() => import('@/components/DropNoteModal'), { ssr: false })
+const AboutSettingsModal = dynamic(() => import('@/components/AboutSettingsModal'), { ssr: false })
 import { apiGetLatestPosts, apiToggleReaction, apiPostToLocal, apiFlagPost } from '@/lib/api'
 import { SEED_NOTES } from '@/constants'
 import { Pin } from 'lucide-react'
